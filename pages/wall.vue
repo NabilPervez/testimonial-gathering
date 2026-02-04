@@ -56,7 +56,9 @@ const testimonials = [
       
       <!-- Animated Testimonials Component -->
       <section class="w-full">
-        <AnimatedTestimonials :data="testimonials" />
+        <ClientOnly>
+          <AnimatedTestimonials :data="testimonials" />
+        </ClientOnly>
       </section>
 
       <!-- Stats Section -->

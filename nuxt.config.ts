@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxtjs/google-fonts', '@nuxt/image', 'motion-v/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxtjs/google-fonts', '@nuxt/image'],
   googleFonts: {
     families: {
       Inter: [300, 400, 500, 600, 700, 800, 900],
