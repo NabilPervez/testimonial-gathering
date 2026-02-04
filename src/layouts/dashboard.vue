@@ -11,27 +11,27 @@
           </div>
           <!-- Navigation Links -->
           <nav class="flex flex-col gap-2 flex-1">
-            <NuxtLink to="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon name="material-symbols:dashboard-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+            <RouterLink to="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+              <Icon icon="material-symbols:dashboard-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Dashboard</span>
-            </NuxtLink>
-            <NuxtLink to="/dashboard/campaigns" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary/10 dark:bg-[#283039] text-primary dark:text-white transition-colors">
-              <Icon name="material-symbols:campaign" class="size-6 icon-filled" />
+            </RouterLink>
+            <RouterLink to="/dashboard/campaigns/new" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary/10 dark:bg-[#283039] text-primary dark:text-white transition-colors">
+              <Icon icon="material-symbols:campaign" class="size-6 icon-filled" />
               <span class="text-sm font-medium">Campaigns</span>
-            </NuxtLink>
+            </RouterLink>
             <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon name="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+              <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Embeds</span>
             </a>
             <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon name="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+              <Icon icon="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Analytics</span>
             </a>
           </nav>
           <!-- Bottom Links -->
           <div class="flex flex-col gap-2">
             <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon name="material-symbols:settings-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+              <Icon icon="material-symbols:settings-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Settings</span>
             </a>
             <div class="flex items-center gap-3 px-4 py-3 mt-2 border-t border-slate-200 dark:border-[#283039]">
@@ -54,7 +54,7 @@
     <!-- Mobile Menu Overlay placeholder -->
     <div class="lg:hidden absolute bottom-4 right-4 z-50">
       <button class="h-14 w-14 rounded-full bg-slate-800 dark:bg-white text-white dark:text-slate-900 shadow-xl flex items-center justify-center">
-        <Icon name="material-symbols:menu" class="size-6" />
+              <Icon icon="material-symbols:menu" class="size-6" />
       </button>
     </div>
   </div>

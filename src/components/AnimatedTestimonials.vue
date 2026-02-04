@@ -1,5 +1,5 @@
-<script lang="ts" setup>
 import { Motion, AnimatePresence } from "motion-v";
+import { ref, computed, onMounted } from 'vue';
 
 interface Testimonial {
   quote: string;
@@ -81,7 +81,7 @@ onMounted(() => {
               :transition="{ duration: 0.4, ease: 'easeInOut' }"
               class="absolute inset-0 origin-bottom"
             >
-              <NuxtImg
+              <img
                 :src="testimonial.image"
                 :alt="testimonial.name"
                 width="500"
@@ -130,13 +130,13 @@ onMounted(() => {
             class="group/button flex size-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             @click="handlePrev"
           >
-             <Icon name="lucide:arrow-left" class="size-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
+             <Icon icon="lucide:arrow-left" class="size-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
           </button>
           <button
             class="group/button flex size-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             @click="handleNext"
           >
-            <Icon name="lucide:arrow-right" class="size-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
+            <Icon icon="lucide:arrow-right" class="size-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
           </button>
         </div>
       </div>

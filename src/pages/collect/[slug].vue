@@ -1,7 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: false
-})
+import { useRoute } from 'vue-router'
+
 const route = useRoute()
 const slug = route.params.slug
 </script>
@@ -17,7 +16,7 @@ const slug = route.params.slug
         <header class="flex flex-col items-center gap-4 text-center">
           <!-- Brand Logo -->
           <div class="flex items-center gap-2 text-primary opacity-90 hover:opacity-100 transition-opacity">
-            <Icon name="material-symbols:verified-user" class="!text-[32px] size-8" />
+            <Icon icon="material-symbols:verified-user" class="!text-[32px] size-8" />
             <span class="text-xl font-bold tracking-tight text-slate-800 dark:text-white">Testimonial.io</span>
           </div>
           <div class="space-y-1">
@@ -38,7 +37,7 @@ const slug = route.params.slug
             <div class="flex flex-col items-center gap-2 mx-auto sm:mx-0 shrink-0">
               <label class="group relative flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-full border-2 border-dashed border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#202934] transition-all hover:border-primary hover:bg-slate-100 dark:hover:bg-[#252f3b]">
                 <div class="flex flex-col items-center justify-center pb-1 pt-2">
-                  <Icon name="material-symbols:add-a-photo" class="text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors size-6" />
+                  <Icon icon="material-symbols:add-a-photo" class="text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors size-6" />
                 </div>
                 <input type="file" accept="image/*" class="hidden" />
                 <div class="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-10 transition-opacity"></div>
@@ -69,14 +68,14 @@ const slug = route.params.slug
                 <label class="cursor-pointer">
                   <input type="radio" name="feedback_type" value="text" class="peer sr-only" checked />
                   <span class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium text-slate-500 dark:text-slate-400 peer-checked:bg-white dark:peer-checked:bg-[#2A3441] peer-checked:text-primary peer-checked:shadow-sm transition-all select-none">
-                    <Icon name="material-symbols:edit" class="text-[18px]" />
+                    <Icon icon="material-symbols:edit" class="text-[18px]" />
                     Write Review
                   </span>
                 </label>
                 <label class="cursor-pointer">
                   <input type="radio" name="feedback_type" value="video" class="peer sr-only" />
                   <span class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium text-slate-500 dark:text-slate-400 peer-checked:bg-white dark:peer-checked:bg-[#2A3441] peer-checked:text-primary peer-checked:shadow-sm transition-all select-none">
-                    <Icon name="material-symbols:videocam" class="text-[18px]" />
+                    <Icon icon="material-symbols:videocam" class="text-[18px]" />
                     Record Video
                   </span>
                 </label>
@@ -100,7 +99,7 @@ const slug = route.params.slug
             <div class="relative group mt-2">
               <textarea class="w-full min-h-[140px] resize-none rounded-xl border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#12181f] p-4 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="What did you like best? How did it help you? Be honest, we love feedback!"></textarea>
               <div class="absolute bottom-3 right-3 pointer-events-none">
-                <Icon name="material-symbols:format-quote" class="text-slate-300 dark:text-slate-600 size-6" />
+                <Icon icon="material-symbols:format-quote" class="text-slate-300 dark:text-slate-600 size-6" />
               </div>
             </div>
           </div>
@@ -109,10 +108,10 @@ const slug = route.params.slug
           <div class="flex flex-col gap-4 mt-2">
             <button class="group relative flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-blue-500/20 transition-all hover:bg-blue-600 hover:shadow-blue-500/30 active:scale-[0.98]">
               <span>Send Testimonial</span>
-              <Icon name="material-symbols:send" class="text-[20px] transition-transform group-hover:translate-x-1" />
+              <Icon icon="material-symbols:send" class="text-[20px] transition-transform group-hover:translate-x-1" />
             </button>
             <div class="flex items-center justify-center gap-2 text-xs text-slate-400 dark:text-slate-500">
-              <Icon name="material-symbols:lock" class="text-[14px]" />
+              <Icon icon="material-symbols:lock" class="text-[14px]" />
               <span>Your information is kept private & secure.</span>
             </div>
           </div>

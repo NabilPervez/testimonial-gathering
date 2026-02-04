@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import AnimatedTestimonials from '~/components/AnimatedTestimonials.vue';
 
-definePageMeta({
-  layout: false
-})
+
 
 const testimonials = [
   {
@@ -35,7 +33,7 @@ const testimonials = [
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-3">
             <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
-              <Icon name="material-symbols:favorite" class="size-5" />
+              <Icon icon="material-symbols:favorite" class="size-5" />
             </div>
             <h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Wall of Love</h2>
           </div>
@@ -45,7 +43,7 @@ const testimonials = [
             </button>
             <!-- Mobile Menu Icon (Visual only) -->
             <button class="sm:hidden text-slate-500 dark:text-slate-400">
-              <Icon name="material-symbols:menu" class="size-6" />
+              <Icon icon="material-symbols:menu" class="size-6" />
             </button>
           </div>
         </div>
@@ -56,9 +54,7 @@ const testimonials = [
       
       <!-- Animated Testimonials Component -->
       <section class="w-full">
-        <ClientOnly>
-          <AnimatedTestimonials :data="testimonials" />
-        </ClientOnly>
+        <AnimatedTestimonials :data="testimonials" />
       </section>
 
       <!-- Stats Section -->
@@ -68,7 +64,7 @@ const testimonials = [
           <div class="flex flex-col items-center justify-center min-w-[140px]">
             <span class="text-6xl font-black text-slate-900 dark:text-white tracking-tighter">5.0</span>
             <div class="flex gap-1 mt-2 text-yellow-400">
-              <Icon name="material-symbols:star" class="text-xl" v-for="i in 5" :key="i" />
+              <Icon icon="material-symbols:star" class="text-xl" v-for="i in 5" :key="i" />
             </div>
             <span class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-2">Based on 128 reviews</span>
           </div>
@@ -88,7 +84,7 @@ const testimonials = [
             <!-- 4 Star -->
             <div class="flex items-center gap-3 text-sm">
               <span class="font-bold w-3 text-slate-700 dark:text-slate-300">4</span>
-              <Icon name="material-symbols:star" class="text-[16px] text-slate-400" />
+              <Icon icon="material-symbols:star" class="text-[16px] text-slate-400" />
               <div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div class="h-full bg-primary rounded-full w-[15%]"></div>
               </div>
