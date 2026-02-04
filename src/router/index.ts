@@ -45,8 +45,28 @@ const router = createRouter({
                     path: 'campaigns/new',
                     name: 'new-campaign',
                     component: DashboardNewCampaign
+                },
+                {
+                    path: 'embed',
+                    name: 'embed',
+                    component: () => import('../pages/dashboard/embed.vue')
+                },
+                {
+                    path: 'analytics',
+                    name: 'analytics',
+                    component: () => import('../pages/dashboard/analytics.vue')
+                },
+                {
+                    path: 'settings',
+                    name: 'settings',
+                    component: () => import('../pages/dashboard/settings.vue')
                 }
             ]
+        },
+        {
+            path: '/preview',
+            name: 'preview',
+            component: () => import('../pages/preview.vue')
         }
     ]
 })

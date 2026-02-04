@@ -19,21 +19,21 @@
               <Icon icon="material-symbols:campaign" class="size-6 icon-filled" />
               <span class="text-sm font-medium">Campaigns</span>
             </RouterLink>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+            <RouterLink to="/dashboard/embed" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Embeds</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+            </RouterLink>
+            <RouterLink to="/dashboard/analytics" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Analytics</span>
-            </a>
+            </RouterLink>
           </nav>
           <!-- Bottom Links -->
           <div class="flex flex-col gap-2">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+            <RouterLink to="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:settings-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Settings</span>
-            </a>
+            </RouterLink>
             <div class="flex items-center gap-3 px-4 py-3 mt-2 border-t border-slate-200 dark:border-[#283039]">
               <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-primary to-purple-500 overflow-hidden"></div>
               <div class="flex flex-col">
