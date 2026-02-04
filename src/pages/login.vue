@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
+const handleSubmit = () => {
+  // In a real app, this would handle authentication
+  router.push('/dashboard')
+}
 </script>
 
 <template>
@@ -29,7 +36,7 @@
           <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
         </div>
         <!-- Magic Link Form -->
-        <form class="flex flex-col gap-4" @submit.prevent>
+        <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
           <div class="space-y-4">
             <div class="relative group">
               <label class="sr-only" for="email">Email address</label>
