@@ -1,3 +1,4 @@
+<script lang="ts" setup>
 import { Motion, AnimatePresence } from "motion-v";
 import { ref, computed, onMounted } from 'vue';
 
