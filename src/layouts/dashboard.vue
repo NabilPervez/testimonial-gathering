@@ -47,7 +47,7 @@
       
       <!-- Main Content Area -->
       <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-        <slot />
+        <RouterView />
       </main>
     </div>
 
