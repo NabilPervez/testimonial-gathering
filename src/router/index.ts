@@ -17,6 +17,16 @@ const router = createRouter({
             component: Index
         },
         {
+            path: '/customerfeedback',
+            name: 'customer-feedback',
+            component: () => import('../pages/customerfeedback.vue')
+        },
+        {
+            path: '/displayboard',
+            name: 'display-board',
+            component: () => import('../pages/displayboard.vue')
+        },
+        {
             path: '/login',
             name: 'login',
             component: Login
@@ -46,9 +56,13 @@ const router = createRouter({
                     component: DashboardIndex
                 },
                 {
-                    path: 'embed',
-                    name: 'embed',
-                    component: () => import('../pages/dashboard/embed.vue')
+                    path: 'viewall',
+                    name: 'view-all-testimonials',
+                    component: () => import('../pages/dashboard/viewall.vue')
+                },
+                {
+                    path: 'embed', // Keeping this for legacy/redirect or remove later if strictly per campaign
+                    redirect: '/campaign'
                 },
                 {
                     path: 'analytics',
@@ -78,11 +92,23 @@ const router = createRouter({
                 },
                 {
                     path: ':slug',
+                    // Parent component for nested matching? or just container?
+                    // Vue router simply matches children.
                     children: [
                         {
                             path: '',
                             name: 'campaign-dashboard',
                             component: () => import('../pages/campaign/[slug]/index.vue')
+                        },
+                        {
+                            path: 'edit',
+                            name: 'campaign-edit',
+                            component: () => import('../pages/campaign/[slug]/edit.vue')
+                        },
+                        {
+                            path: 'embed',
+                            name: 'campaign-embed',
+                            component: () => import('../pages/campaign/[slug]/embed.vue')
                         },
                         {
                             path: ':id',

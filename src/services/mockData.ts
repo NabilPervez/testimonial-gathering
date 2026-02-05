@@ -23,8 +23,18 @@ export interface Testimonial {
     avatar?: string;
 }
 
-// Initial Mock Data
-let campaigns: Campaign[] = [
+// Helper to load from localStorage or default
+const loadFromStorage = <T>(key: string, defaultData: T): T => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : defaultData;
+}
+
+const saveToStorage = (key: string, data: any) => {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+// Initial Data (Default)
+const defaultCampaigns: Campaign[] = [
     {
         id: 1,
         name: "Summer Launch Feedback",
@@ -60,7 +70,7 @@ let campaigns: Campaign[] = [
     }
 ];
 
-let testimonials: Testimonial[] = [
+const defaultTestimonials: Testimonial[] = [
     {
         id: 101,
         campaignSlug: "summer-launch",
@@ -141,12 +151,20 @@ let testimonials: Testimonial[] = [
     }
 ];
 
+// Initialize from storage or defaults
+let campaigns: Campaign[] = loadFromStorage('campaigns', defaultCampaigns);
+let testimonials: Testimonial[] = loadFromStorage('testimonials', defaultTestimonials);
+
+
 // Service Methods simulating Async API calls
 export const mockService = {
     // Campaigns
     getCampaigns: async (): Promise<Campaign[]> => {
         return new Promise((resolve) => {
-            setTimeout(() => resolve([...campaigns]), 300);
+            setTimeout(() => {
+                campaigns = loadFromStorage('campaigns', defaultCampaigns); // Refresh
+                resolve([...campaigns]);
+            }, 300);
         });
     },
 
@@ -161,6 +179,7 @@ export const mockService = {
                     status: 'Active'
                 };
                 campaigns.push(campaign);
+                saveToStorage('campaigns', campaigns);
                 resolve(campaign);
             }, 400);
         });
@@ -175,7 +194,10 @@ export const mockService = {
     // Testimonials
     getTestimonials: async (): Promise<Testimonial[]> => {
         return new Promise((resolve) => {
-            setTimeout(() => resolve([...testimonials]), 300);
+            setTimeout(() => {
+                testimonials = loadFromStorage('testimonials', defaultTestimonials);
+                resolve([...testimonials]);
+            }, 300);
         });
     },
 
@@ -195,12 +217,14 @@ export const mockService = {
                     date: new Date().toISOString().split('T')[0]
                 };
                 testimonials.push(testimonial);
+                saveToStorage('testimonials', testimonials);
 
                 // Update specific campaign response count
                 const campaign = campaigns.find(c => c.slug === submission.campaignSlug);
                 if (campaign) {
                     campaign.responses++;
                     campaign.lastActive = 'Just now';
+                    saveToStorage('campaigns', campaigns);
                 }
 
                 resolve(testimonial);
@@ -214,6 +238,7 @@ export const mockService = {
                 const index = testimonials.findIndex(t => t.id === id);
                 if (index !== -1) {
                     testimonials[index].status = status;
+                    saveToStorage('testimonials', testimonials);
                     resolve(testimonials[index]);
                 } else {
                     resolve(undefined);

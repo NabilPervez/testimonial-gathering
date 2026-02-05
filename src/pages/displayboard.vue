@@ -9,158 +9,90 @@ onMounted(() => {
     store.fetchTestimonials()
 })
 
-const testimonials = computed(() => store.approvedTestimonials)
-
 const formattedTestimonials = computed(() => {
-    return store.approvedTestimonials.map(t => ({
-        quote: t.content,
-        name: t.name,
-        designation: t.title,
-        image: t.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=000`
-    }))
+    return store.approvedTestimonials
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 5) // Top 5 highest rated
+        .map(t => ({
+            quote: t.content,
+            name: t.name,
+            designation: t.title,
+            image: t.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=000`
+        }))
 })
 </script>
 
 <template>
-<div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden min-h-screen flex flex-col">
-<!-- Navbar / Header -->
-<header class="w-full border-b border-gray-200 dark:border-[#283039] bg-white/50 dark:bg-[#111418]/80 backdrop-blur-md sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex items-center justify-between h-16">
-<div class="flex items-center gap-3">
-<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
-<span class="material-symbols-outlined text-[20px]">favorite</span>
-</div>
-<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Customer Feedback</h2>
-</div>
-<div class="flex items-center gap-4">
-<button class="hidden sm:flex items-center justify-center px-5 h-9 rounded-full bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold shadow-lg shadow-primary/20">
-                        Get this for your site
-                    </button>
-<!-- Mobile Menu Icon (Visual only) -->
-<button class="sm:hidden text-slate-500 dark:text-slate-400">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</div>
-</header>
-<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 flex flex-col gap-12 md:gap-20">
-<!-- Hero Section: Dynamic Carousel -->
-<section class="min-h-[500px] flex items-center justify-center">
-    <AnimatedTestimonials :data="formattedTestimonials" :autoplay="true" />
-</section>
-<!-- Stats Section -->
-<section class="w-full bg-white dark:bg-card-dark rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100 dark:border-white/5">
-<div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-<!-- Big Score -->
-<div class="flex flex-col items-center justify-center min-w-[140px]">
-<span class="text-6xl font-black text-slate-900 dark:text-white tracking-tighter">5.0</span>
-<div class="flex gap-1 mt-2 text-yellow-400">
-<span class="material-symbols-outlined text-xl fill-current">star</span>
-<span class="material-symbols-outlined text-xl fill-current">star</span>
-<span class="material-symbols-outlined text-xl fill-current">star</span>
-<span class="material-symbols-outlined text-xl fill-current">star</span>
-<span class="material-symbols-outlined text-xl fill-current">star</span>
-</div>
-<span class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-2">Based on 128 reviews</span>
-</div>
-<!-- Divider -->
-<div class="hidden md:block w-px h-32 bg-slate-200 dark:bg-gray-700"></div>
-<!-- Progress Bars -->
-<div class="flex-1 w-full grid gap-3 max-w-lg">
-<!-- 5 Star -->
-<div class="flex items-center gap-3 text-sm">
-<span class="font-bold w-3 text-slate-700 dark:text-slate-300">5</span>
-<span class="material-symbols-outlined text-[16px] text-slate-400">star</span>
-<div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-[85%]"></div>
-</div>
-<span class="w-10 text-right text-slate-500 dark:text-slate-400">85%</span>
-</div>
-<!-- 4 Star -->
-<div class="flex items-center gap-3 text-sm">
-<span class="font-bold w-3 text-slate-700 dark:text-slate-300">4</span>
-<span class="material-symbols-outlined text-[16px] text-slate-400">star</span>
-<div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-[15%]"></div>
-</div>
-<span class="w-10 text-right text-slate-500 dark:text-slate-400">15%</span>
-</div>
-<!-- 3 Star -->
-<div class="flex items-center gap-3 text-sm opacity-50">
-<span class="font-bold w-3 text-slate-700 dark:text-slate-300">3</span>
-<span class="material-symbols-outlined text-[16px] text-slate-400">star</span>
-<div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-0"></div>
-</div>
-<span class="w-10 text-right text-slate-500 dark:text-slate-400">0%</span>
-</div>
-<!-- 2 Star -->
-<div class="flex items-center gap-3 text-sm opacity-50">
-<span class="font-bold w-3 text-slate-700 dark:text-slate-300">2</span>
-<span class="material-symbols-outlined text-[16px] text-slate-400">star</span>
-<div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-0"></div>
-</div>
-<span class="w-10 text-right text-slate-500 dark:text-slate-400">0%</span>
-</div>
-<!-- 1 Star -->
-<div class="flex items-center gap-3 text-sm opacity-50">
-<span class="font-bold w-3 text-slate-700 dark:text-slate-300">1</span>
-<span class="material-symbols-outlined text-[16px] text-slate-400">star</span>
-<div class="flex-1 h-2 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-0"></div>
-</div>
-<span class="w-10 text-right text-slate-500 dark:text-slate-400">0%</span>
-</div>
-</div>
-</div>
-</section>
-<!-- More Love Grid -->
-<section class="flex flex-col gap-6 pb-12">
-<h3 class="text-2xl font-bold text-slate-900 dark:text-white px-2">All Customer Feedback</h3>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Dynamic Card -->
-<RouterLink :to="`/feedback/${testimonial.id}`" v-for="testimonial in testimonials" :key="testimonial.id" class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group cursor-pointer hover:shadow-lg">
-    <!-- Optional Image placeholder if we had images -->
-    <div v-if="testimonial.type === 'video'" class="aspect-video w-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
-        <Icon icon="material-symbols:play-circle" class="text-4xl text-white/80" />
-    </div>
-    <div class="p-6 flex flex-col gap-4">
-        <div class="flex gap-1 text-primary text-sm">
-            <span v-for="i in 5" :key="i" class="material-symbols-outlined text-[18px] fill-current" :class="i <= testimonial.rating ? 'opacity-100' : 'opacity-30'">star</span>
-        </div>
-        <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3">
-            "{{ testimonial.content }}"
-        </p>
-        <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-800 mt-auto">
-            <div>
-                <p class="text-slate-900 dark:text-white font-semibold text-sm">{{ testimonial.name }}</p>
-                <p class="text-slate-500 dark:text-slate-400 text-xs">{{ testimonial.title }}</p>
-            </div>
-            <button class="text-primary hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-primary/10">
-                <span class="material-symbols-outlined">arrow_outward</span>
-            </button>
-        </div>
-    </div>
-</RouterLink>
-</div>
-</section>
-</main>
-</div>
-</template>
+  <div class="bg-slate-50 dark:bg-[#0d1117] min-h-screen font-display">
+      <!-- Navbar (Simplified) -->
+      <header class="w-full bg-white/80 dark:bg-[#161b22]/80 backdrop-blur-md border-b border-slate-200 dark:border-[#30363d] sticky top-0 z-50">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+               <div class="flex items-center gap-2">
+                   <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">T</div>
+                   <span class="font-bold text-slate-900 dark:text-white">Testimonial.io</span>
+               </div>
+               <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+                   <a href="#" class="hover:text-primary transition-colors">Features</a>
+                   <a href="#" class="hover:text-primary transition-colors">Pricing</a>
+                   <a href="#" class="hover:text-primary transition-colors">Examples</a>
+               </nav>
+               <button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                   Get Started
+               </button>
+          </div>
+      </header>
 
-<style scoped>
-/* Custom scrollbar hiding */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-</style>
+      <main>
+          <!-- Hero / Carousel Section -->
+          <section class="py-20 px-4">
+              <div class="max-w-4xl mx-auto text-center mb-16">
+                  <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4">Loved by design teams worldwide</h1>
+                  <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">See what our customers have to say about the product.</p>
+              </div>
+              
+              <div class="flex justify-center">
+                  <AnimatedTestimonials :data="formattedTestimonials" :autoplay="true" />
+              </div>
+          </section>
+
+          <!-- Grid Section -->
+          <section class="py-20 bg-white dark:bg-[#161b22] border-t border-slate-200 dark:border-[#30363d]">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Community Feedback</h2>
+                  
+                  <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                      <!-- Promo Card -->
+                      <div v-for="t in store.approvedTestimonials" :key="t.id" class="break-inside-avoid bg-slate-50 dark:bg-[#0d1117] rounded-3xl p-6 border border-slate-200 dark:border-[#30363d] hover:border-primary/50 transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+                          <!-- Header -->
+                          <div class="flex items-center gap-4 mb-4">
+                              <div class="size-12 rounded-full overflow-hidden bg-slate-200">
+                                  <img :src="t.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random`" class="w-full h-full object-cover">
+                              </div>
+                              <div>
+                                  <h3 class="font-bold text-slate-900 dark:text-white leading-tight">{{ t.name }}</h3>
+                                  <p class="text-sm text-slate-500 dark:text-slate-400">{{ t.title }}</p>
+                              </div>
+                          </div>
+                          
+                          <!-- Stars -->
+                          <div class="flex gap-1 text-yellow-400 mb-4">
+                              <Icon icon="material-symbols:star" class="size-5 fill-current" v-for="i in 5" :key="i" :class="i <= t.rating ? 'opacity-100' : 'opacity-20'" />
+                          </div>
+
+                          <!-- Content -->
+                          <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                              "{{ t.content }}"
+                          </p>
+                          
+                          <!-- Date/Footer -->
+                          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-[#30363d] flex justify-between items-center">
+                               <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">{{ t.date }}</span>
+                               <Icon icon="logos:google-icon" class="size-5 opacity-50 grayscale hover:grayscale-0 transition-all" />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </main>
+  </div>
+</template>
