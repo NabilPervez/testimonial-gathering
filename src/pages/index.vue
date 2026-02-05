@@ -65,7 +65,7 @@ const features = [
 
 
 
-        <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[1.1] mb-6 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 0.1s;">
+        <h1 class="text-4xl md:text-7xl font-black tracking-tight leading-[1.1] mb-6 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 0.1s;">
             Turn customer love into <br class="hidden md:block" />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">revenue on autopilot.</span>
         </h1>

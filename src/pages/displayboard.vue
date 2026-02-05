@@ -58,9 +58,9 @@ const formattedTestimonials = computed(() => {
           </section>
 
           <!-- Grid Section -->
-          <section class="py-20 bg-white dark:bg-[#161b22] border-t border-slate-200 dark:border-[#30363d]">
+          <section class="py-12 md:py-20 bg-white dark:bg-[#161b22] border-t border-slate-200 dark:border-[#30363d]">
               <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Community Feedback</h2>
+                  <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 md:mb-12 text-center">Community Feedback</h2>
                   
                   <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                       <!-- Promo Card -->
