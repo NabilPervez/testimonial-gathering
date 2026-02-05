@@ -174,24 +174,7 @@ const features = [
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-slate-100 dark:border-[#283039] text-center text-slate-500 dark:text-slate-400 text-sm">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <div class="size-6 bg-slate-900 dark:bg-white rounded-md flex items-center justify-center text-white dark:text-slate-900 font-bold text-xs">T</div>
-                <span class="font-bold text-slate-900 dark:text-white">Testimonial.io</span>
-            </div>
-            <div class="flex gap-8">
-                <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Pricing</a>
-                <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Blog</a>
-                <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
-                <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Terms</a>
-            </div>
-            <div>
-                &copy; {{ new Date().getFullYear() }} Testimonial.io Inc.
-            </div>
-        </div>
-    </footer>
+
 
   </div>
 </template>
