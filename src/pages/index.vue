@@ -63,10 +63,7 @@ const features = [
         <!-- Background Orbs -->
         <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
 
-        <div class="inline-flex items-center gap-2 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm shadow-sm animate-fade-in-up">
-             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-             <span class="text-sm font-semibold text-slate-600 dark:text-slate-300">New: AI Sentiment Analysis</span>
-        </div>
+
 
         <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[1.1] mb-6 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 0.1s;">
             Turn customer love into <br class="hidden md:block" />
@@ -84,14 +81,7 @@ const features = [
             </button>
         </div>
 
-        <!-- Social Proof Strip -->
-        <div class="mt-16 grayscale opacity-60 flex gap-8 md:gap-16 items-center justify-center flex-wrap animate-fade-in-up" style="animation-delay: 0.4s;">
-             <Icon icon="logos:spotify" class="h-8 w-auto" />
-             <Icon icon="logos:slack" class="h-8 w-auto" />
-             <Icon icon="logos:netflix" class="h-8 w-auto" />
-             <Icon icon="logos:stripe" class="h-8 w-auto" />
-             <Icon icon="logos:airbnb" class="h-8 w-auto" />
-        </div>
+
     </section>
 
     <!-- How it Works (3 Steps) -->
@@ -140,17 +130,17 @@ const features = [
                      <div class="bg-white dark:bg-[#161b22] rounded-3xl shadow-2xl border border-slate-200 dark:border-[#30363d] p-8 relative overflow-hidden">
                          <div class="flex items-center gap-4 mb-6 border-b border-slate-100 dark:border-[#30363d] pb-6">
                              <div class="size-12 rounded-full bg-slate-200 overflow-hidden">
-                                 <img src="https://ui-avatars.com/api/?name=Elon+Musk&background=random" />
+                                 <img src="https://ui-avatars.com/api/?name=Sarah+Chen&background=random" />
                              </div>
                              <div>
-                                 <div class="font-bold">Elon Musk</div>
-                                 <div class="text-sm text-slate-500">CEO, SpaceX</div>
+                                 <div class="font-bold">Sarah Chen</div>
+                                 <div class="text-sm text-slate-500">Marketing Director, TechFlow</div>
                              </div>
                              <div class="ml-auto text-yellow-400 flex text-lg">
                                  <Icon icon="material-symbols:star" v-for="i in 5" :key="i" class="fill-current" />
                              </div>
                          </div>
-                         <p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">"I usually don't do testimonials, but this tool is actually useful. It saved my team hundreds of hours. Highly recommended."</p>
+                         <p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">"We were struggling to collect meaningful feedback. With Testimonial.io, we gathered over 50 video reviews in just a week. It's a game changer."</p>
                          <div class="mt-6 flex justify-end">
                              <Icon icon="logos:twitter" class="size-6 opacity-50" />
                          </div>
