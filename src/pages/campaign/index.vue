@@ -39,7 +39,7 @@ const getRecentTestimonials = (slug: string) => {
     <div class="flex-1 overflow-y-auto px-8 pb-12">
       <div v-if="campaigns.length > 0" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <!-- Campaign Card -->
-        <div v-for="campaign in campaigns" :key="campaign.id" class="bg-white dark:bg-[#1c242c] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] hover:border-primary/50 transition-all group relative flex flex-col h-full">
+        <RouterLink :to="`/campaign/${campaign.slug}`" v-for="campaign in campaigns" :key="campaign.id" class="bg-white dark:bg-[#1c242c] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] hover:border-primary/50 transition-all group relative flex flex-col h-full cursor-pointer hover:shadow-md">
             <div class="flex items-start justify-between mb-4">
                 <div class="p-3 rounded-xl bg-primary/10 text-primary">
                     <Icon icon="material-symbols:campaign" class="size-6" />
@@ -91,7 +91,7 @@ const getRecentTestimonials = (slug: string) => {
                     </div>
                  </div>
             </div>
-        </div>
+        </RouterLink>
       </div>
       
       <!-- Empty State -->

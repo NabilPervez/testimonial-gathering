@@ -93,6 +93,51 @@ let testimonials: Testimonial[] = [
         content: "The navigation is a bit confusing, but the colors are great.",
         status: "rejected",
         date: "2023-06-10"
+    },
+    {
+        id: 104,
+        campaignSlug: "csat-q1",
+        name: "Tony Stark",
+        title: "CEO at Stark Industries",
+        rating: 5,
+        type: "text",
+        content: "This product is the future. Integrating it was a breeze.",
+        status: "approved",
+        date: "2023-06-20",
+        avatar: "https://ui-avatars.com/api/?name=Tony+Stark&background=random"
+    },
+    {
+        id: 105,
+        campaignSlug: "csat-q1",
+        name: "Steve Rogers",
+        title: "Captain",
+        rating: 5,
+        type: "text",
+        content: "Honest, reliable service. Would recommend to anyone.",
+        status: "approved",
+        date: "2023-06-21"
+    },
+    {
+        id: 106,
+        campaignSlug: "summer-launch",
+        name: "Bruce Wayne",
+        title: "Philanthropist",
+        rating: 3,
+        type: "text",
+        content: "It comes in black, right? Good quality otherwise.",
+        status: "pending",
+        date: "2023-06-22"
+    },
+    {
+        id: 107,
+        campaignSlug: "website-redesign",
+        name: "Peter Parker",
+        title: "Photographer",
+        rating: 5,
+        type: "text",
+        content: "The new layout is amazing! So snappy and responsive.",
+        status: "approved",
+        date: "2023-06-23"
     }
 ];
 

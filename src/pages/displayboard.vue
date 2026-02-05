@@ -119,10 +119,10 @@ const formattedTestimonials = computed(() => {
 </section>
 <!-- More Love Grid -->
 <section class="flex flex-col gap-6 pb-12">
-<h3 class="text-2xl font-bold text-slate-900 dark:text-white px-2">More love from our community</h3>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white px-2">All Customer Feedback</h3>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 <!-- Dynamic Card -->
-<div v-for="testimonial in testimonials" :key="testimonial.id" class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group">
+<RouterLink :to="`/feedback/${testimonial.id}`" v-for="testimonial in testimonials" :key="testimonial.id" class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group cursor-pointer hover:shadow-lg">
     <!-- Optional Image placeholder if we had images -->
     <div v-if="testimonial.type === 'video'" class="aspect-video w-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
         <Icon icon="material-symbols:play-circle" class="text-4xl text-white/80" />
@@ -144,7 +144,7 @@ const formattedTestimonials = computed(() => {
             </button>
         </div>
     </div>
-</div>
+</RouterLink>
 </div>
 </section>
 </main>

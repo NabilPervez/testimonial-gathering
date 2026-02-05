@@ -27,6 +27,11 @@ const router = createRouter({
             component: Wall
         },
         {
+            path: '/feedback/:id',
+            name: 'feedback-detail',
+            component: () => import('../pages/feedback/[id].vue')
+        },
+        {
             path: '/collect/:slug',
             name: 'collect',
             component: CollectSlug
@@ -72,9 +77,19 @@ const router = createRouter({
                     component: () => import('../pages/campaign/new.vue')
                 },
                 {
-                    path: ':slug/:id',
-                    name: 'campaign-testimonial-detail',
-                    component: () => import('../pages/campaign/[slug]/[id].vue')
+                    path: ':slug',
+                    children: [
+                        {
+                            path: '',
+                            name: 'campaign-dashboard',
+                            component: () => import('../pages/campaign/[slug]/index.vue')
+                        },
+                        {
+                            path: ':id',
+                            name: 'campaign-testimonial-detail',
+                            component: () => import('../pages/campaign/[slug]/[id].vue')
+                        }
+                    ]
                 }
             ]
         },
