@@ -23,6 +23,13 @@ const handleSubmit = () => {
   <div class="font-display antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300 min-h-screen flex items-center justify-center p-4">
     <!-- Centered Card Container -->
       <div class="bg-white dark:bg-card-dark rounded-xl shadow-xl border border-slate-200 dark:border-border-dark overflow-hidden p-8 md:p-12 relative">
+        <!-- Demo Notification -->
+        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/30 rounded-lg p-3 mb-8 text-center">
+            <p class="text-sm text-blue-700 dark:text-blue-300 font-medium">
+                <span class="font-bold">✨ Demo Mode:</span> Enter any fake email (e.g. test@test.com) to sign in instantly.
+            </p>
+        </div>
+
         <!-- Logo Section -->
         <div class="flex flex-col items-center gap-6 mb-10">
           <div class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
