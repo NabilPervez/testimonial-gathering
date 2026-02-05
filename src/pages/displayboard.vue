@@ -1,5 +1,14 @@
 <script setup lang="ts">
-// No script needed as this is a static preview page as per request
+import { useTestimonialStore } from '../stores/testimonials'
+import { onMounted, computed } from 'vue'
+
+const store = useTestimonialStore()
+
+onMounted(() => {
+    store.fetchTestimonials()
+})
+
+const testimonials = computed(() => store.approvedTestimonials)
 </script>
 
 <template>
@@ -27,7 +36,7 @@
 </div>
 </header>
 <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 flex flex-col gap-12 md:gap-20">
-<!-- Hero Section: Featured Testimonial (Split Layout) -->
+<!-- Hero Section: Featured Testimonial (Static for MVP or First Item) -->
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[500px]">
 <!-- Left: Image Stack -->
 <div class="relative w-full flex justify-center lg:justify-end pr-0 lg:pr-10 group perspective-1000">
@@ -38,7 +47,7 @@
 <div class="absolute inset-0 bg-slate-300 dark:bg-gray-700 rounded-[2rem] transform -rotate-3 scale-95 translate-x-2 opacity-60 transition-transform duration-500 ease-out group-hover:-rotate-6 group-hover:-translate-x-2 z-10" data-alt="Abstract stacked card background pattern layer 2"></div>
 <!-- Front Card (Main Image) -->
 <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl z-20 transform transition-transform duration-500 hover:scale-[1.02]">
-<div class="w-full h-full bg-cover bg-center" data-alt="Professional headshot of Sarah Jenkins smiling in an office environment" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4oewxfyT3T42LkzyTulH5V_8_tUmGDL7cEfaRzypy7gdP7GwVQaibHiTRTCH0yTVtmMvhvqR-hapeV7sBRYx2Uszy2-j1LjIVxiaytg3lYozgXqT9dAjKfgiHkur3fB_ejIQvMsblWjSrtEM8jCkqvrDx2V4ZPApgRMcQ7FpqlKYTYMW9vzzZeslq1TU0i19Oc23iHrMLzblxVR_Kg7h-jIUIKLFHGIeyLnw-lfPURtiswbqQsU07tbg0ro3DbRVa0TWXMeRCZc');">
+<div class="w-full h-full bg-cover bg-center" data-alt="Featured Testimonial Image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4oewxfyT3T42LkzyTulH5V_8_tUmGDL7cEfaRzypy7gdP7GwVQaibHiTRTCH0yTVtmMvhvqR-hapeV7sBRYx2Uszy2-j1LjIVxiaytg3lYozgXqT9dAjKfgiHkur3fB_ejIQvMsblWjSrtEM8jCkqvrDx2V4ZPApgRMcQ7FpqlKYTYMW9vzzZeslq1TU0i19Oc23iHrMLzblxVR_Kg7h-jIUIKLFHGIeyLnw-lfPURtiswbqQsU07tbg0ro3DbRVa0TWXMeRCZc');">
 <!-- Overlay gradient for text readability if needed inside card -->
 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 </div>
@@ -150,80 +159,29 @@
 <section class="flex flex-col gap-6 pb-12">
 <h3 class="text-2xl font-bold text-slate-900 dark:text-white px-2">More love from our community</h3>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Card 1 -->
-<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group">
-<div class="aspect-video w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of Michael Chen in a modern office suit" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDVoMf3nyraS0rqW_jbZDsn-djo4jhk9rk4o21ED98Mvrm07f4j8HQXvfnydyWppUaa9XZJOpP1_fRQUF6DSIgamcww5SAapHjkeFU81N9JvNea-8cOo1aDvKpFyfYpAQNndPSLJvmd7fkJnWaERNF1KMIf6C50eQSOTuEdj-2Nbx_yn33pKA1Rhnn0hBJn6RKO5qHOYdJTWBjkVKKEcf4M-AHUtLCw3OWj1KXLc7uClKwo-cgrqdEQ7dhPai0a5oit1xG4JQfbB1E');"></div>
-<div class="p-6 flex flex-col gap-4">
-<div class="flex gap-1 text-primary text-sm">
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-</div>
-<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3">
-                            "Implementation was seamless. The API documentation is fantastic and the support team was super responsive when we had edge-case questions."
-                        </p>
-<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-800 mt-auto">
-<div>
-<p class="text-slate-900 dark:text-white font-semibold text-sm">Michael Chen</p>
-<p class="text-slate-500 dark:text-slate-400 text-xs">Product Lead @ Innovate</p>
-</div>
-<button class="text-primary hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-primary/10">
-<span class="material-symbols-outlined">arrow_outward</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group">
-<div class="aspect-video w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Jessica Alba looking confident in a business setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtdT5lzGL-AbgoYkp9NDYG5Z4Ydn378sOcNGgVhqdXoX_iGIsZ5NTe0Nniv-REf5fi4Nk9Oflu-0aZ8KsyameFrFGjvu7TKV_9jTqDfMFZsWJRzGEaUZSgp3YYv-7VySVULGL_KPhY9QWu7l3YhyaQ5oYEtGpaH1qBb0UJUMB7o4nwb0rfsMFHDAlcc5bNq5jREc3RneaEBhE-__2cpKgg_UgxO-Z-XJfz5YX9JWUGzM7RUQb5QyPBarkFryRmyxeR-XL37ZI9eis');"></div>
-<div class="p-6 flex flex-col gap-4">
-<div class="flex gap-1 text-primary text-sm">
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-</div>
-<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3">
-                            "As a founder, I wear many hats. This tool took the burden of social proof off my plate completely. Highly recommended for any startup."
-                        </p>
-<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-800 mt-auto">
-<div>
-<p class="text-slate-900 dark:text-white font-semibold text-sm">Jessica Alba</p>
-<p class="text-slate-500 dark:text-slate-400 text-xs">Founder @ StartUp</p>
-</div>
-<button class="text-primary hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-primary/10">
-<span class="material-symbols-outlined">arrow_outward</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group sm:hidden lg:block">
-<div class="aspect-video w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="David Miller smiling casually" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQpEcO6YJ_IaoSKqB1_S82j7rNcdkA_a2Tk_-8jnVnu4dpk_LMIR9PGFEveKpElVQWVtcfkSbQXCHgs40n618RXKv1_qPTAuT-0x0wLyVlgyOkJJSoP9Wikzc_wdc25TpITReboZ-G4WPapvOJcyddvTNr6ESTIBHX3QD1U6L0bOex0uZMRGyKqum8FhvOgoh50MvddxWFFLTMTyxAjUkAGX3I2F7XXbu1-JmD8LcBKMSH6Goxrry74bd65D2Z211igSEE7ZkezDc');"></div>
-<div class="p-6 flex flex-col gap-4">
-<div class="flex gap-1 text-primary text-sm">
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star</span>
-<span class="material-symbols-outlined text-[18px] fill-current">star_half</span>
-</div>
-<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3">
-                            "The ROI was evident within the first month. Our conversion rate on the pricing page went up by 15% after embedding the wall of love."
-                        </p>
-<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-800 mt-auto">
-<div>
-<p class="text-slate-900 dark:text-white font-semibold text-sm">David Miller</p>
-<p class="text-slate-500 dark:text-slate-400 text-xs">CRO @ EnterpriseInc</p>
-</div>
-<button class="text-primary hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-primary/10">
-<span class="material-symbols-outlined">arrow_outward</span>
-</button>
-</div>
-</div>
+<!-- Dynamic Card -->
+<div v-for="testimonial in testimonials" :key="testimonial.id" class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:border-primary/50 transition-colors group">
+    <!-- Optional Image placeholder if we had images -->
+    <div v-if="testimonial.type === 'video'" class="aspect-video w-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+        <Icon icon="material-symbols:play-circle" class="text-4xl text-white/80" />
+    </div>
+    <div class="p-6 flex flex-col gap-4">
+        <div class="flex gap-1 text-primary text-sm">
+            <span v-for="i in 5" :key="i" class="material-symbols-outlined text-[18px] fill-current" :class="i <= testimonial.rating ? 'opacity-100' : 'opacity-30'">star</span>
+        </div>
+        <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3">
+            "{{ testimonial.content }}"
+        </p>
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-800 mt-auto">
+            <div>
+                <p class="text-slate-900 dark:text-white font-semibold text-sm">{{ testimonial.name }}</p>
+                <p class="text-slate-500 dark:text-slate-400 text-xs">{{ testimonial.title }}</p>
+            </div>
+            <button class="text-primary hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-primary/10">
+                <span class="material-symbols-outlined">arrow_outward</span>
+            </button>
+        </div>
+    </div>
 </div>
 </div>
 </section>

@@ -9,8 +9,8 @@
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Stat Card 1 -->
-      <div class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9]">
+      <RouterLink to="/displayboard" class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4 hover:border-primary/50 transition-colors group">
+        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9] group-hover:text-primary transition-colors">
           <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary">
             <Icon icon="material-symbols:reviews" class="size-5" />
           </div>
@@ -20,11 +20,11 @@
           <span class="text-3xl font-bold text-slate-900 dark:text-white">1,248</span>
           <span class="text-xs font-medium text-emerald-500 ml-2">+12% this month</span>
         </div>
-      </div>
+      </RouterLink>
 
       <!-- Stat Card 2 -->
-      <div class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9]">
+      <RouterLink to="/campaign" class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4 hover:border-primary/50 transition-colors group">
+        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9] group-hover:text-primary transition-colors">
           <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
             <Icon icon="material-symbols:campaign" class="size-5" />
           </div>
@@ -34,11 +34,11 @@
           <span class="text-3xl font-bold text-slate-900 dark:text-white">8</span>
           <span class="text-xs font-medium text-slate-400 ml-2">3 pending launch</span>
         </div>
-      </div>
+      </RouterLink>
 
       <!-- Stat Card 3 -->
-      <div class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9]">
+      <RouterLink to="/dashboard/analytics" class="bg-white dark:bg-[#111418] rounded-xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4 hover:border-primary/50 transition-colors group">
+        <div class="flex items-center gap-3 text-slate-500 dark:text-[#9dabb9] group-hover:text-primary transition-colors">
           <div class="p-2 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
             <Icon icon="material-symbols:visibility" class="size-5" />
           </div>
@@ -48,7 +48,19 @@
           <span class="text-3xl font-bold text-slate-900 dark:text-white">45.2k</span>
           <span class="text-xs font-medium text-emerald-500 ml-2">+5% this week</span>
         </div>
-      </div>
+      </RouterLink>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="flex flex-wrap gap-4">
+        <RouterLink to="/campaign/new" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-[#1c2127] hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">
+            <Icon icon="material-symbols:add-circle" class="size-5 text-primary" />
+            Create Campaign
+        </RouterLink>
+        <RouterLink to="/displayboard" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-[#1c2127] hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">
+            <Icon icon="material-symbols:preview" class="size-5 text-purple-500" />
+            View Wall
+        </RouterLink>
     </div>
 
     <!-- Recent Activity -->

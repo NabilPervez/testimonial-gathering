@@ -1,23 +1,66 @@
 
 
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { reactive, ref } from 'vue'
+import { useCampaignStore } from '../../stores/campaigns'
+
+const router = useRouter()
+const store = useCampaignStore()
+const isSaving = ref(false)
+
+const form = reactive({
+  name: '',
+  slug: '',
+  headerTitle: 'How was your experience?',
+  allowText: true,
+  allowVideo: true
+})
+
+const handleSave = async () => {
+    if(!form.name || !form.slug) {
+        alert('Please fill in the Campaign Name and Slug')
+        return
+    }
+
+    isSaving.value = true
+    try {
+        await store.createCampaign({
+            name: form.name,
+            slug: form.slug,
+            headerTitle: form.headerTitle,
+            allowText: form.allowText,
+            allowVideo: form.allowVideo,
+            status: 'Active'
+        })
+        alert('Campaign Created!')
+        router.push('/campaign')
+    } catch (error) {
+        alert('Failed to create campaign')
+    } finally {
+        isSaving.value = false
+    }
+}
+</script>
+
 <template>
   <!-- Top Navigation / Header -->
   <header class="w-full flex items-center justify-between px-8 py-6 bg-transparent shrink-0 z-10">
     <div class="flex flex-col gap-1">
       <!-- Breadcrumbs -->
       <div class="flex items-center gap-2 text-sm">
-        <a href="#" class="text-slate-500 dark:text-[#9dabb9] hover:text-primary transition-colors">Dashboard</a>
+        <RouterLink to="/dashboard" class="text-slate-500 dark:text-[#9dabb9] hover:text-primary transition-colors">Dashboard</RouterLink>
         <span class="text-slate-400 dark:text-[#525f6e]">/</span>
-        <a href="#" class="text-slate-500 dark:text-[#9dabb9] hover:text-primary transition-colors">Campaigns</a>
+        <RouterLink to="/campaign" class="text-slate-500 dark:text-[#9dabb9] hover:text-primary transition-colors">Campaigns</RouterLink>
         <span class="text-slate-400 dark:text-[#525f6e]">/</span>
         <span class="text-slate-900 dark:text-white font-medium">New Campaign</span>
       </div>
     </div>
     <div class="flex items-center gap-4">
-      <button class="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors">
-        Preview
+      <button @click="router.back()" class="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors">
+        Cancel
       </button>
-      <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+      <button @click="handleSave" class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
         <Icon icon="material-symbols:publish" class="size-5" />
         Save & Publish
       </button>
@@ -44,17 +87,17 @@
           <div class="grid gap-6">
             <!-- Campaign Name -->
             <label class="flex flex-col gap-2">
-              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Internal Campaign Name</span>
-              <input type="text" class="form-input w-full rounded-xl border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] text-slate-900 dark:text-white focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-colors" placeholder="e.g. Summer Launch Feedback" />
+              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Internal Campaign Name <span class="text-red-500">*</span></span>
+              <input v-model="form.name" type="text" class="form-input w-full rounded-xl border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] text-slate-900 dark:text-white focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-colors" placeholder="e.g. Summer Launch Feedback" required />
             </label>
             <!-- Page Slug -->
             <label class="flex flex-col gap-2">
-              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Public Page Slug</span>
+              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Public Page Slug <span class="text-red-500">*</span></span>
               <div class="flex items-center w-full rounded-xl border border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] focus-within:ring-1 focus-within:ring-primary focus-within:border-primary overflow-hidden h-12 transition-colors">
                 <div class="pl-4 pr-2 text-slate-500 dark:text-[#9dabb9] bg-slate-100 dark:bg-[#283039] h-full flex items-center border-r border-slate-300 dark:border-[#3b4754] text-sm whitespace-nowrap">
                   domain.com/c/
                 </div>
-                <input type="text" class="form-input w-full border-none bg-transparent text-slate-900 dark:text-white focus:ring-0 h-full px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="your-custom-slug" />
+                <input v-model="form.slug" type="text" class="form-input w-full border-none bg-transparent text-slate-900 dark:text-white focus:ring-0 h-full px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="your-custom-slug" required />
               </div>
               <p class="text-xs text-slate-500 dark:text-[#9dabb9]">This will be the URL where your customers leave testimonials.</p>
             </label>
@@ -71,7 +114,7 @@
             <!-- Header Title -->
             <label class="flex flex-col gap-2">
               <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Header Title</span>
-              <input type="text" class="form-input w-full rounded-xl border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] text-slate-900 dark:text-white focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-colors" placeholder="e.g. How was your experience with us?" />
+              <input v-model="form.headerTitle" type="text" class="form-input w-full rounded-xl border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] text-slate-900 dark:text-white focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-colors" placeholder="e.g. How was your experience with us?" />
             </label>
             <!-- Logo Upload -->
             <div class="flex flex-col gap-2">
@@ -101,7 +144,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Option 1: Text -->
               <label class="relative flex items-center p-4 rounded-xl border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] cursor-pointer hover:border-primary transition-colors">
-                <input type="checkbox" checked class="form-checkbox h-5 w-5 text-primary rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-[#283039] focus:ring-primary focus:ring-offset-0" />
+                <input v-model="form.allowText" type="checkbox" class="form-checkbox h-5 w-5 text-primary rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-[#283039] focus:ring-primary focus:ring-offset-0" />
                 <div class="ml-4 flex items-center gap-3">
                   <div class="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary">
                     <Icon icon="material-symbols:text-fields" class="size-6" />
@@ -114,7 +157,7 @@
               </label>
               <!-- Option 2: Video -->
               <label class="relative flex items-center p-4 rounded-xl border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1c2127] cursor-pointer hover:border-primary transition-colors">
-                <input type="checkbox" checked class="form-checkbox h-5 w-5 text-primary rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-[#283039] focus:ring-primary focus:ring-offset-0" />
+                <input v-model="form.allowVideo" type="checkbox" class="form-checkbox h-5 w-5 text-primary rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-[#283039] focus:ring-primary focus:ring-offset-0" />
                 <div class="ml-4 flex items-center gap-3">
                   <div class="p-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
                     <Icon icon="material-symbols:videocam" class="size-6" />
@@ -131,9 +174,12 @@
 
         <!-- Mobile Action Button (only visible on small screens) -->
         <div class="block sm:hidden w-full pb-8">
-          <button class="w-full flex justify-center items-center gap-2 px-6 py-4 rounded-full bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+          <button @click="handleSave" class="w-full flex justify-center items-center gap-2 px-6 py-4 rounded-full bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
             <Icon icon="material-symbols:publish" class="size-6" />
             Save & Publish
+          </button>
+           <button @click="router.back()" class="w-full mt-3 flex justify-center items-center gap-2 px-6 py-4 rounded-full text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-all">
+            Cancel
           </button>
         </div>
       </form>

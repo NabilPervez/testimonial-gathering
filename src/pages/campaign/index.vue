@@ -1,30 +1,15 @@
 <script setup lang="ts">
-const campaigns = [
-  {
-    id: 1,
-    name: "Summer Launch Feedback",
-    slug: "summer-launch",
-    status: "Active",
-    responses: 24,
-    lastActive: "2h ago"
-  },
-  {
-    id: 2,
-    name: "Website Redesign",
-    slug: "website-redesign",
-    status: "Paused",
-    responses: 12,
-    lastActive: "1d ago"
-  },
-  {
-    id: 3,
-    name: "Customer Satisfaction Q1",
-    slug: "csat-q1",
-    status: "Active",
-    responses: 156,
-    lastActive: "5m ago"
-  }
-]
+import { useCampaignStore } from '../../stores/campaigns'
+import { onMounted, computed } from 'vue'
+
+const store = useCampaignStore()
+
+// Fetch data on mount
+onMounted(() => {
+    store.fetchCampaigns()
+})
+
+const campaigns = computed(() => store.items)
 </script>
 
 <template>
@@ -43,7 +28,7 @@ const campaigns = [
 
     <!-- Content -->
     <div class="flex-1 overflow-y-auto px-8 pb-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div v-if="campaigns.length > 0" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <!-- Campaign Card -->
         <div v-for="campaign in campaigns" :key="campaign.id" class="bg-white dark:bg-[#1c242c] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] hover:border-primary/50 transition-all group cursor-pointer relative">
             <div class="flex items-start justify-between mb-4">
@@ -68,6 +53,20 @@ const campaigns = [
                 </div>
             </div>
         </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div v-else class="flex flex-col items-center justify-center h-[60vh] text-center gap-6">
+        <div class="size-24 rounded-3xl bg-slate-100 dark:bg-[#1c242c] flex items-center justify-center text-slate-300 dark:text-slate-600">
+            <Icon icon="material-symbols:campaign" class="size-12" />
+        </div>
+        <div class="space-y-2">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">No campaigns yet</h3>
+            <p class="text-slate-500 dark:text-[#9dabb9] max-w-sm mx-auto">Create your first testimonial collection page to start gathering feedback from your customers.</p>
+        </div>
+        <RouterLink to="/campaign/new" class="px-8 py-3 rounded-full bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+            Create Campaign
+        </RouterLink>
       </div>
     </div>
   </div>
