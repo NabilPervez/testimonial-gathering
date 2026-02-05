@@ -132,8 +132,8 @@ const defaultTestimonials: Testimonial[] = mockTestimonialsData.map((t, index) =
 }));
 
 // Initialize from storage or defaults
-let campaigns: Campaign[] = loadFromStorage('campaigns', defaultCampaigns);
-let testimonials: Testimonial[] = loadFromStorage('testimonials', defaultTestimonials);
+let campaigns: Campaign[] = loadFromStorage('campaigns_v2', defaultCampaigns);
+let testimonials: Testimonial[] = loadFromStorage('testimonials_v2', defaultTestimonials);
 
 
 // Service Methods simulating Async API calls
@@ -142,7 +142,7 @@ export const mockService = {
     getCampaigns: async (): Promise<Campaign[]> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                campaigns = loadFromStorage('campaigns', defaultCampaigns); // Refresh
+                campaigns = loadFromStorage('campaigns_v2', defaultCampaigns); // Refresh
                 resolve([...campaigns]);
             }, 300);
         });
@@ -159,7 +159,7 @@ export const mockService = {
                     status: 'Active'
                 };
                 campaigns.push(campaign);
-                saveToStorage('campaigns', campaigns);
+                saveToStorage('campaigns_v2', campaigns);
                 resolve(campaign);
             }, 400);
         });
@@ -175,7 +175,7 @@ export const mockService = {
     getTestimonials: async (): Promise<Testimonial[]> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                testimonials = loadFromStorage('testimonials', defaultTestimonials);
+                testimonials = loadFromStorage('testimonials_v2', defaultTestimonials);
                 resolve([...testimonials]);
             }, 300);
         });
@@ -197,14 +197,14 @@ export const mockService = {
                     date: new Date().toISOString().split('T')[0]
                 };
                 testimonials.push(testimonial);
-                saveToStorage('testimonials', testimonials);
+                saveToStorage('testimonials_v2', testimonials);
 
                 // Update specific campaign response count
                 const campaign = campaigns.find(c => c.slug === submission.campaignSlug);
                 if (campaign) {
                     campaign.responses++;
                     campaign.lastActive = 'Just now';
-                    saveToStorage('campaigns', campaigns);
+                    saveToStorage('campaigns_v2', campaigns);
                 }
 
                 resolve(testimonial);
@@ -218,7 +218,7 @@ export const mockService = {
                 const index = testimonials.findIndex(t => t.id === id);
                 if (index !== -1) {
                     testimonials[index].status = status;
-                    saveToStorage('testimonials', testimonials);
+                    saveToStorage('testimonials_v2', testimonials);
                     resolve(testimonials[index]);
                 } else {
                     resolve(undefined);

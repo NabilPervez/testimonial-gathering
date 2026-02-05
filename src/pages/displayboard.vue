@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useTestimonialStore } from '../stores/testimonials'
 import AnimatedTestimonials from '../components/AnimatedTestimonials.vue'
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const store = useTestimonialStore()
@@ -11,15 +11,20 @@ const route = useRoute()
 const campaignSlug = computed(() => route.params.slug as string | undefined)
 
 onMounted(() => {
-    // If slug exists, we ideally fetch specific, but fetchTestimonials loads all currently.
-    // fetchByCampaign is available if needed, but for now we filter client side from the main list or fetch all.
-    // If we want to be efficient we should call fetchByCampaign if slug is present.
+    loadData()
+})
+
+watch(() => route.params.slug, () => {
+    loadData()
+})
+
+const loadData = () => {
     if (campaignSlug.value) {
         store.fetchByCampaign(campaignSlug.value)
     } else {
         store.fetchTestimonials()
     }
-})
+}
 
 const displayTestimonials = computed(() => {
     let items = store.approvedTestimonials
