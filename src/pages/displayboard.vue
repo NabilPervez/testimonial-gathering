@@ -78,7 +78,7 @@ const formattedTestimonials = computed(() => {
 
                           <!-- Content -->
                           <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
-                              "{{ t.content }}"
+                              {{ t.content }}
                           </p>
                           
                           <!-- Date/Footer -->
