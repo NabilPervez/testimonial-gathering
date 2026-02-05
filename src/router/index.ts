@@ -3,7 +3,6 @@ import Index from '../pages/index.vue'
 import Login from '../pages/login.vue'
 import Wall from '../pages/wall.vue'
 import DashboardLayout from '../layouts/dashboard.vue'
-import DashboardNewCampaign from '../pages/dashboard/campaigns/new.vue'
 import CollectSlug from '../pages/collect/[slug].vue'
 
 // Temporary placeholder for dashboard index
@@ -42,11 +41,6 @@ const router = createRouter({
                     component: DashboardIndex
                 },
                 {
-                    path: 'campaigns/new',
-                    name: 'new-campaign',
-                    component: DashboardNewCampaign
-                },
-                {
                     path: 'embed',
                     name: 'embed',
                     component: () => import('../pages/dashboard/embed.vue')
@@ -64,9 +58,42 @@ const router = createRouter({
             ]
         },
         {
-            path: '/preview',
-            name: 'preview',
-            component: () => import('../pages/preview.vue')
+            path: '/campaign',
+            component: DashboardLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'campaigns',
+                    component: () => import('../pages/campaign/index.vue')
+                },
+                {
+                    path: 'new',
+                    name: 'new-campaign',
+                    component: () => import('../pages/campaign/new.vue')
+                }
+            ]
+        },
+        {
+            path: '/displayboard',
+            component: DashboardLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'displayboard',
+                    component: () => import('../pages/displayboard.vue')
+                }
+            ]
+        },
+        {
+            path: '/testimonial/:id',
+            component: DashboardLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'testimonial-details',
+                    component: () => import('../pages/testimonial/[id].vue')
+                }
+            ]
         }
     ]
 })

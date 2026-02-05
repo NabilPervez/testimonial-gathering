@@ -15,7 +15,7 @@
               <Icon icon="material-symbols:dashboard-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Dashboard</span>
             </RouterLink>
-            <RouterLink to="/dashboard/campaigns/new" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary/10 dark:bg-[#283039] text-primary dark:text-white transition-colors">
+            <RouterLink to="/campaign" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary/10 dark:bg-[#283039] text-primary dark:text-white transition-colors">
               <Icon icon="material-symbols:campaign" class="size-6 icon-filled" />
               <span class="text-sm font-medium">Campaigns</span>
             </RouterLink>
@@ -23,7 +23,7 @@
               <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Embeds</span>
             </RouterLink>
-            <RouterLink to="/preview" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+            <RouterLink to="/displayboard" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:preview" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Display Board</span>
             </RouterLink>
