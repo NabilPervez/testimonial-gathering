@@ -23,6 +23,10 @@
               <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Embeds</span>
             </RouterLink>
+            <RouterLink to="/preview" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+              <Icon icon="material-symbols:preview" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+              <span class="text-sm font-medium">Display Board</span>
+            </RouterLink>
             <RouterLink to="/dashboard/analytics" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Analytics</span>

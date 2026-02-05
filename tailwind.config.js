@@ -14,7 +14,7 @@ module.exports = {
                 "primary": "#137fec",
                 "background-light": "#f6f7f8",
                 "background-dark": "#101922",
-                "card-dark": "#1c242c",
+                "card-dark": "#16212b",
                 "border-dark": "#2d3748",
             },
             fontFamily: {
