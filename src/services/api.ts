@@ -11,9 +11,21 @@ const isLocalBackendAvailable = async () => {
     }
 }
 
+const isProduction = () => {
+    if (typeof window !== 'undefined') {
+        const hostname = window.location.hostname;
+        return hostname !== 'localhost' && hostname !== '127.0.0.1';
+    }
+    return false;
+};
+
 export const apiFn = {
     // Campaigns
     getCampaigns: async (): Promise<Campaign[]> => {
+        if (isProduction()) {
+            console.log('Production environment detected, using Mock Data');
+            return await mockService.getCampaigns();
+        }
         try {
             const res = await fetch(`${API_URL}/campaigns`);
             if (!res.ok) throw new Error('Failed to fetch campaigns');
@@ -25,6 +37,7 @@ export const apiFn = {
     },
 
     createCampaign: async (campaign: any): Promise<Campaign> => {
+        if (isProduction()) return await mockService.createCampaign(campaign);
         try {
             const res = await fetch(`${API_URL}/campaigns`, {
                 method: 'POST',
@@ -40,6 +53,7 @@ export const apiFn = {
     },
 
     updateCampaign: async (id: number, updates: any): Promise<Campaign> => {
+        if (isProduction()) return { ...updates, id } as Campaign;
         try {
             const res = await fetch(`${API_URL}/campaigns/${id}`, {
                 method: 'PUT',
@@ -57,6 +71,7 @@ export const apiFn = {
 
     // Testimonials
     getTestimonials: async (): Promise<Testimonial[]> => {
+        if (isProduction()) return await mockService.getTestimonials();
         try {
             const res = await fetch(`${API_URL}/testimonials`);
             if (!res.ok) throw new Error('Failed to fetch testimonials');
@@ -68,6 +83,7 @@ export const apiFn = {
     },
 
     getTestimonialsByCampaign: async (slug: string): Promise<Testimonial[]> => {
+        if (isProduction()) return await mockService.getTestimonialsByCampaign(slug);
         try {
             const res = await fetch(`${API_URL}/campaigns/${slug}/testimonials`);
             if (!res.ok) throw new Error('Failed to fetch campaign testimonials');
@@ -79,6 +95,7 @@ export const apiFn = {
     },
 
     submitTestimonial: async (submission: any): Promise<Testimonial> => {
+        if (isProduction()) return await mockService.submitTestimonial(submission);
         try {
             const res = await fetch(`${API_URL}/testimonials`, {
                 method: 'POST',
@@ -95,6 +112,7 @@ export const apiFn = {
     },
 
     updateTestimonialStatus: async (id: number, status: any): Promise<Testimonial | undefined> => {
+        if (isProduction()) return await mockService.updateTestimonialStatus(id, status);
         try {
             const res = await fetch(`${API_URL}/testimonials/${id}/status`, {
                 method: 'PUT',
