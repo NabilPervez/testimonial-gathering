@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const appName = ref('Testimonial Collector')
+
+onMounted(() => {
+    const savedName = localStorage.getItem('site_name')
+    if (savedName) appName.value = savedName
+})
+</script>
+
 <template>
   <div class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden h-screen w-full">
     <div class="flex h-full w-full flex-row">
@@ -6,7 +17,7 @@
         <div class="p-6 flex flex-col gap-8 h-full">
           <!-- Brand -->
           <div class="flex flex-col gap-1">
-            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Testimonial Collector</h1>
+            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ appName }}</h1>
             <p class="text-sm font-medium text-slate-500 dark:text-[#9dabb9]">Admin Workspace</p>
           </div>
           <!-- Navigation Links -->
@@ -20,10 +31,7 @@
               <span class="text-sm font-medium">Campaigns</span>
             </RouterLink>
 
-            <RouterLink to="/displayboard" active-class="bg-primary/10 text-primary dark:bg-[#283039] dark:text-white" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon icon="material-symbols:preview" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors group-[.router-link-active]:text-primary dark:group-[.router-link-active]:text-white" />
-              <span class="text-sm font-medium">Customer Feedback</span>
-            </RouterLink>
+
             <RouterLink to="/dashboard/analytics" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Analytics</span>

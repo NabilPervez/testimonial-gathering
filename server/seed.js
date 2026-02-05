@@ -50,6 +50,7 @@ async function seed() {
 
     // Seed Testimonials
     const testimonials = [
+        // Summer Launch (Approved)
         {
             campaignSlug: "summer-launch",
             name: "Sarah Connor",
@@ -62,6 +63,27 @@ async function seed() {
         },
         {
             campaignSlug: "summer-launch",
+            name: "Ellen Ripley",
+            title: "Warrant Officer",
+            rating: 5,
+            type: "text",
+            content: "Durable and stylish. Survived everything I threw at it.",
+            status: "approved",
+            date: "2023-06-18"
+        },
+        {
+            campaignSlug: "summer-launch",
+            name: "Marty McFly",
+            title: "Time Traveler",
+            rating: 4,
+            type: "text",
+            content: "Great for any era. A bit heavy but looks heavy.",
+            status: "approved",
+            date: "2023-06-19"
+        },
+        // Summer Launch (Pending/Rejected)
+        {
+            campaignSlug: "summer-launch",
             name: "John Wick",
             title: "Professional",
             rating: 5,
@@ -70,6 +92,49 @@ async function seed() {
             status: "pending",
             date: "2023-06-16"
         },
+        {
+            campaignSlug: "summer-launch",
+            name: "Bruce Wayne",
+            title: "Philanthropist",
+            rating: 3,
+            type: "text",
+            content: "It comes in black, right? Good quality otherwise.",
+            status: "pending",
+            date: "2023-06-22"
+        },
+
+        // Website Redesign (Approved)
+        {
+            campaignSlug: "website-redesign",
+            name: "Peter Parker",
+            title: "Photographer",
+            rating: 5,
+            type: "text",
+            content: "The new layout is amazing! So snappy and responsive.",
+            status: "approved",
+            date: "2023-06-23"
+        },
+        {
+            campaignSlug: "website-redesign",
+            name: "Diana Prince",
+            title: "Museum Curator",
+            rating: 5,
+            type: "text",
+            content: "Elegant and easy to navigate. A wonderful improvement.",
+            status: "approved",
+            date: "2023-06-24"
+        },
+        {
+            campaignSlug: "website-redesign",
+            name: "Clark Kent",
+            title: "Journalist",
+            rating: 4,
+            type: "text",
+            content: "Much faster load times. Good job team.",
+            status: "approved",
+            date: "2023-06-25"
+        },
+        // Website Redesign (Rejected)
         {
             campaignSlug: "website-redesign",
             name: "Alice Wonderland",
@@ -80,6 +145,8 @@ async function seed() {
             status: "rejected",
             date: "2023-06-10"
         },
+
+        // CSAT Q1 (Approved)
         {
             campaignSlug: "csat-q1",
             name: "Tony Stark",
@@ -102,24 +169,24 @@ async function seed() {
             date: "2023-06-21"
         },
         {
-            campaignSlug: "summer-launch",
-            name: "Bruce Wayne",
-            title: "Philanthropist",
-            rating: 3,
-            type: "text",
-            content: "It comes in black, right? Good quality otherwise.",
-            status: "pending",
-            date: "2023-06-22"
-        },
-        {
-            campaignSlug: "website-redesign",
-            name: "Peter Parker",
-            title: "Photographer",
+            campaignSlug: "csat-q1",
+            name: "Natasha Romanoff",
+            title: "Agent",
             rating: 5,
             type: "text",
-            content: "The new layout is amazing! So snappy and responsive.",
+            content: "Efficient and discreet. Perfect execution.",
             status: "approved",
-            date: "2023-06-23"
+            date: "2023-06-26"
+        },
+        {
+            campaignSlug: "csat-q1",
+            name: "Wanda Maximoff",
+            title: "Homeowner",
+            rating: 5,
+            type: "text",
+            content: "Magical experience! Truly transformative.",
+            status: "approved",
+            date: "2023-06-27"
         }
     ];
 

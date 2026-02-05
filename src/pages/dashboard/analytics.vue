@@ -1,72 +1,63 @@
 <template>
   <div class="p-6 md:p-8 flex flex-col gap-8 flex-1 overflow-y-auto">
-    <div class="flex flex-col gap-2">
-      <h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Analytics</h1>
-      <p class="text-slate-500 dark:text-[#9dabb9]">Track the performance of your testimonial campaigns.</p>
-    </div>
-
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div v-for="(stat, i) in stats" :key="i" class="bg-white dark:bg-[#111418] p-5 rounded-xl border border-slate-200 dark:border-[#283039]">
-        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">{{ stat.label }}</p>
-        <p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">{{ stat.value }}</p>
-        <p class="text-xs mt-2" :class="stat.trend > 0 ? 'text-green-500' : 'text-red-500'">
-          {{ stat.trend > 0 ? '+' : '' }}{{ stat.trend }}% vs last month
-        </p>
+      <div class="flex flex-col gap-2">
+          <h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Analytics</h1>
+          <p class="text-slate-500 dark:text-[#9dabb9]">Overview of your testimonial collection performance.</p>
       </div>
-    </div>
 
-    <!-- Chart Placeholder (Views) -->
-    <div class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#283039] p-6 flex flex-col gap-6">
-      <div class="flex items-center justify-between">
-        <h3 class="font-bold text-slate-900 dark:text-white">Total Views</h3>
-        <select class="bg-slate-50 dark:bg-[#1c2127] border border-slate-200 dark:border-[#3b4754] rounded-lg text-sm px-3 py-1 text-slate-700 dark:text-slate-300">
-          <option>Last 30 Days</option>
-          <option>Last 7 Days</option>
-        </select>
-      </div>
-      <!-- Mock Bar Chart -->
-      <div class="h-64 flex items-end justify-between gap-2 px-4">
-         <div v-for="h in [40, 65, 30, 80, 55, 90, 45, 70, 60, 85, 50, 75]" :key="h" 
-              class="w-full bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm relative group"
-              :style="{ height: h + '%' }">
-              <div class="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs py-1 px-2 rounded pointer-events-none whitespace-nowrap">
-                {{ h * 10 }} views
+      <!-- Global Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div v-for="stat in stats" :key="stat.label" class="bg-white dark:bg-[#111418] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] shadow-sm flex flex-col gap-4 relative overflow-hidden group hover:border-primary/50 transition-colors">
+              <div class="flex justify-between items-start z-10">
+                  <span class="text-sm font-bold text-slate-500 dark:text-[#9dabb9]">{{ stat.label }}</span>
+                  <span :class="stat.trend > 0 ? 'text-green-500' : 'text-red-500'" class="text-xs font-bold px-2 py-1 rounded-full bg-slate-50 dark:bg-[#1c2127] flex items-center gap-1">
+                      <Icon :icon="stat.trend > 0 ? 'material-symbols:trending-up' : 'material-symbols:trending-down'" />
+                      {{ Math.abs(stat.trend) }}%
+                  </span>
               </div>
-         </div>
+              <div class="text-3xl font-black text-slate-900 dark:text-white z-10">{{ stat.value }}</div>
+              
+              <!-- Decoration -->
+              <div class="absolute -bottom-4 -right-4 text-slate-100 dark:text-[#1c2127] opacity-50 group-hover:scale-110 transition-transform duration-500">
+                   <Icon icon="material-symbols:analytics" class="size-24" />
+              </div>
+          </div>
       </div>
-      <div class="flex justify-between text-xs text-slate-400 border-t border-slate-200 dark:border-[#283039] pt-2">
-        <span>Jan 1</span>
-        <span>Jan 8</span>
-        <span>Jan 15</span>
-        <span>Jan 22</span>
-      </div>
-    </div>
 
-    <!-- Recent Events List -->
-     <div class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#283039] overflow-hidden">
-      <div class="p-6 border-b border-slate-200 dark:border-[#283039]">
-        <h3 class="font-bold text-slate-900 dark:text-white">Recent Conversions</h3>
+      <!-- Campaign Breakdown -->
+      <div class="flex flex-col gap-6">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Campaign Breakdown</h2>
+          <div class="grid grid-cols-1 gap-6">
+              <div v-for="campaign in campaignStore.items" :key="campaign.id" class="bg-white dark:bg-[#111418] rounded-2xl border border-slate-200 dark:border-[#283039] overflow-hidden">
+                  <div class="p-6 border-b border-slate-200 dark:border-[#283039] bg-slate-50 dark:bg-[#1c2127] flex justify-between items-center">
+                      <div class="flex flex-col">
+                          <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ campaign.name }}</h3>
+                          <span class="text-xs font-mono text-slate-500">/{{ campaign.slug }}</span>
+                      </div>
+                      <span :class="campaign.status === 'Active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                          {{ campaign.status }}
+                      </span>
+                  </div>
+                  <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                       <!-- Responses -->
+                       <div class="flex flex-col gap-1">
+                           <span class="text-sm text-slate-500 dark:text-[#9dabb9]">Total Responses</span>
+                           <span class="text-2xl font-black text-slate-900 dark:text-white">{{ campaign.responses }}</span>
+                       </div>
+                       <!-- Last Active -->
+                       <div class="flex flex-col gap-1">
+                           <span class="text-sm text-slate-500 dark:text-[#9dabb9]">Last Activity</span>
+                           <span class="text-2xl font-bold text-slate-700 dark:text-slate-300">{{ campaign.lastActive }}</span>
+                       </div>
+                       <!-- Conversion (Mock) -->
+                        <div class="flex flex-col gap-1">
+                           <span class="text-sm text-slate-500 dark:text-[#9dabb9]">Conv. Rate (Est)</span>
+                           <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ (Math.random() * 5 + 1).toFixed(1) }}%</span>
+                       </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <table class="w-full text-sm text-left">
-        <thead class="text-xs text-slate-500 dark:text-slate-400 uppercase bg-slate-50 dark:bg-[#1c2127]">
-          <tr>
-            <th class="px-6 py-3">Source</th>
-            <th class="px-6 py-3">Event</th>
-            <th class="px-6 py-3">Date</th>
-            <th class="px-6 py-3">Value</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-100 dark:divide-[#283039]">
-          <tr v-for="i in 4" :key="i" class="bg-white dark:bg-[#111418] hover:bg-slate-50 dark:hover:bg-[#1c2127]">
-            <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Landing Page</td>
-            <td class="px-6 py-4">Widget Click</td>
-            <td class="px-6 py-4 text-slate-500">Just now</td>
-            <td class="px-6 py-4 text-emerald-500 font-medium">Verified</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </template>
 

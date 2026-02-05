@@ -71,6 +71,7 @@ const defaultCampaigns: Campaign[] = [
 ];
 
 const defaultTestimonials: Testimonial[] = [
+    // Summer Launch (Approved)
     {
         id: 101,
         campaignSlug: "summer-launch",
@@ -83,6 +84,29 @@ const defaultTestimonials: Testimonial[] = [
         date: "2023-06-15"
     },
     {
+        id: 1012,
+        campaignSlug: "summer-launch",
+        name: "Ellen Ripley",
+        title: "Warrant Officer",
+        rating: 5,
+        type: "text",
+        content: "Durable and stylish. Survived everything I threw at it.",
+        status: "approved",
+        date: "2023-06-18"
+    },
+    {
+        id: 1013,
+        campaignSlug: "summer-launch",
+        name: "Marty McFly",
+        title: "Time Traveler",
+        rating: 4,
+        type: "text",
+        content: "Great for any era. A bit heavy but looks heavy.",
+        status: "approved",
+        date: "2023-06-19"
+    },
+    // Summer Launch (Pending)
+    {
         id: 102,
         campaignSlug: "summer-launch",
         name: "John Wick",
@@ -94,6 +118,53 @@ const defaultTestimonials: Testimonial[] = [
         date: "2023-06-16"
     },
     {
+        id: 106,
+        campaignSlug: "summer-launch",
+        name: "Bruce Wayne",
+        title: "Philanthropist",
+        rating: 3,
+        type: "text",
+        content: "It comes in black, right? Good quality otherwise.",
+        status: "pending",
+        date: "2023-06-22"
+    },
+
+    // Website Redesign (Approved)
+    {
+        id: 107,
+        campaignSlug: "website-redesign",
+        name: "Peter Parker",
+        title: "Photographer",
+        rating: 5,
+        type: "text",
+        content: "The new layout is amazing! So snappy and responsive.",
+        status: "approved",
+        date: "2023-06-23"
+    },
+    {
+        id: 1071,
+        campaignSlug: "website-redesign",
+        name: "Diana Prince",
+        title: "Museum Curator",
+        rating: 5,
+        type: "text",
+        content: "Elegant and easy to navigate. A wonderful improvement.",
+        status: "approved",
+        date: "2023-06-24"
+    },
+    {
+        id: 1072,
+        campaignSlug: "website-redesign",
+        name: "Clark Kent",
+        title: "Journalist",
+        rating: 4,
+        type: "text",
+        content: "Much faster load times. Good job team.",
+        status: "approved",
+        date: "2023-06-25"
+    },
+    // Website Redesign (Rejected)
+    {
         id: 103,
         campaignSlug: "website-redesign",
         name: "Alice Wonderland",
@@ -104,6 +175,8 @@ const defaultTestimonials: Testimonial[] = [
         status: "rejected",
         date: "2023-06-10"
     },
+
+    // CSAT Q1 (Approved)
     {
         id: 104,
         campaignSlug: "csat-q1",
@@ -128,26 +201,26 @@ const defaultTestimonials: Testimonial[] = [
         date: "2023-06-21"
     },
     {
-        id: 106,
-        campaignSlug: "summer-launch",
-        name: "Bruce Wayne",
-        title: "Philanthropist",
-        rating: 3,
-        type: "text",
-        content: "It comes in black, right? Good quality otherwise.",
-        status: "pending",
-        date: "2023-06-22"
-    },
-    {
-        id: 107,
-        campaignSlug: "website-redesign",
-        name: "Peter Parker",
-        title: "Photographer",
+        id: 1051,
+        campaignSlug: "csat-q1",
+        name: "Natasha Romanoff",
+        title: "Agent",
         rating: 5,
         type: "text",
-        content: "The new layout is amazing! So snappy and responsive.",
+        content: "Efficient and discreet. Perfect execution.",
         status: "approved",
-        date: "2023-06-23"
+        date: "2023-06-26"
+    },
+    {
+        id: 1052,
+        campaignSlug: "csat-q1",
+        name: "Wanda Maximoff",
+        title: "Homeowner",
+        rating: 5,
+        type: "text",
+        content: "Magical experience! Truly transformative.",
+        status: "approved",
+        date: "2023-06-27"
     }
 ];
 
