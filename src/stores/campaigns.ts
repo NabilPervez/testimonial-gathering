@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { mockService, type Campaign } from '../services/mockData'
+import { apiFn } from '../services/api'
+import { type Campaign } from '../services/mockData'
 
 export const useCampaignStore = defineStore('campaigns', {
     state: () => ({
@@ -17,7 +18,7 @@ export const useCampaignStore = defineStore('campaigns', {
         async fetchCampaigns() {
             this.loading = true
             try {
-                const data = await mockService.getCampaigns()
+                const data = await apiFn.getCampaigns()
                 this.items = data
             } catch (e) {
                 this.error = 'Failed to fetch campaigns'
@@ -29,7 +30,7 @@ export const useCampaignStore = defineStore('campaigns', {
         async createCampaign(campaign: Omit<Campaign, 'id' | 'responses' | 'lastActive'>) {
             this.loading = true
             try {
-                const newCampaign = await mockService.createCampaign(campaign)
+                const newCampaign = await apiFn.createCampaign(campaign)
                 this.items.push(newCampaign)
                 return newCampaign
             } catch (e) {

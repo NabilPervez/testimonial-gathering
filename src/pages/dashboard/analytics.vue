@@ -71,10 +71,28 @@
 </template>
 
 <script setup lang="ts">
-const stats = [
-  { label: 'Impressions', value: '142.5k', trend: 12 },
-  { label: 'Clicks', value: '3,402', trend: 5.4 },
-  { label: 'CTR', value: '2.4%', trend: -0.8 },
-  { label: 'Submissions', value: '84', trend: 18 },
-]
+import { useCampaignStore } from '../../stores/campaigns'
+import { useTestimonialStore } from '../../stores/testimonials'
+import { onMounted, computed } from 'vue'
+
+const campaignStore = useCampaignStore()
+const testimonialStore = useTestimonialStore()
+
+onMounted(async () => {
+    if (campaignStore.items.length === 0) await campaignStore.fetchCampaigns()
+    if (testimonialStore.items.length === 0) await testimonialStore.fetchTestimonials()
+})
+
+const totalSubmissions = computed(() => testimonialStore.items.length)
+// Mocking impressions based on submissions for demo purposes (assuming 2% conversion)
+const totalImpressions = computed(() => Math.floor(totalSubmissions.value * 50) + 120)
+const totalClicks = computed(() => Math.floor(totalImpressions.value * 0.15))
+const ctr = computed(() => ((totalClicks.value / totalImpressions.value) * 100).toFixed(1))
+
+const stats = computed(() => [
+  { label: 'Impressions (Est)', value: totalImpressions.value.toLocaleString(), trend: 12 },
+  { label: 'Clicks (Est)', value: totalClicks.value.toLocaleString(), trend: 5.4 },
+  { label: 'CTR (Est)', value: `${ctr.value}%`, trend: -0.8 },
+  { label: 'Submissions', value: totalSubmissions.value.toLocaleString(), trend: 18 },
+])
 </script>

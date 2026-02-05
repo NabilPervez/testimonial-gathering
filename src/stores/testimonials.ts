@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { mockService, type Testimonial } from '../services/mockData'
+import { apiFn } from '../services/api'
+import { type Testimonial } from '../services/mockData'
 
 export const useTestimonialStore = defineStore('testimonials', {
     state: () => ({
@@ -17,7 +18,7 @@ export const useTestimonialStore = defineStore('testimonials', {
         async fetchTestimonials() {
             this.loading = true
             try {
-                const data = await mockService.getTestimonials()
+                const data = await apiFn.getTestimonials()
                 this.items = data
             } catch (e) {
                 this.error = 'Failed to fetch testimonials'
@@ -27,17 +28,12 @@ export const useTestimonialStore = defineStore('testimonials', {
         },
 
         async fetchByCampaign(slug: string) {
-            // For now, we'll just fetch all and filter client side or mock service side
-            // But mock service has a specific method
             this.loading = true
             try {
-                const data = await mockService.getTestimonialsByCampaign(slug)
-                // Just merging for MVP simplicity, or replacing if checking a specific view
-                // Better to keep a single source of truth list or separate lists
-                // Let's verify if items are already there to avoid duplicates if we push
-                // For MVP: Replaces items with filtered list logic might be tricky if we switch views
-                // So let's just use fetchAll for the admin view, and specific methods for specific public views if needed.
-                // Actually, let's just update the main list with what we find, deduping by ID
+                // Fetch specific campaign testimonials and merge/update
+                const data = await apiFn.getTestimonialsByCampaign(slug)
+
+                // Update local items ensuring no duplicates (simple approach)
                 data.forEach(newItem => {
                     const index = this.items.findIndex(existing => existing.id === newItem.id)
                     if (index !== -1) {
@@ -56,7 +52,7 @@ export const useTestimonialStore = defineStore('testimonials', {
         async submitTestimonial(submission: Omit<Testimonial, 'id' | 'status' | 'date'>) {
             this.loading = true
             try {
-                const newTestimonial = await mockService.submitTestimonial(submission)
+                const newTestimonial = await apiFn.submitTestimonial(submission)
                 this.items.push(newTestimonial)
                 return newTestimonial
             } catch (e) {
@@ -75,7 +71,7 @@ export const useTestimonialStore = defineStore('testimonials', {
                 this.items[index].status = status
 
                 try {
-                    await mockService.updateTestimonialStatus(id, status)
+                    await apiFn.updateTestimonialStatus(id, status)
                 } catch (e) {
                     // Revert
                     this.items[index].status = oldStatus
