@@ -82,9 +82,11 @@ const formattedTestimonials = computed(() => {
                           </div>
 
                           <!-- Content -->
-                          <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
-                              {{ t.content }}
-                          </p>
+                          <div class="relative z-10 my-4">
+                               <p class="text-gray-800 dark:text-gray-200 text-base leading-normal block w-full opacity-100 visible">
+                                  {{ t.content }}
+                               </p>
+                          </div>
                           
                           <!-- Date/Footer -->
                           <div class="mt-6 pt-4 border-t border-slate-200 dark:border-[#30363d] flex justify-between items-center">
