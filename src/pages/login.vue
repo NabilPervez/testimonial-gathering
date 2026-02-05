@@ -80,7 +80,6 @@ const handleSubmit = () => {
       <!-- Abstract Decoration (Optional subtle glow behind) -->
       <div class="absolute -top-10 -left-10 w-72 h-72 bg-primary/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
       <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
-    </main>
   </div>
 </template>
 
