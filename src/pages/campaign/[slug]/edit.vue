@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
-import { useCampaignStore } from '../../stores/campaigns'
+import { useCampaignStore } from '../../../stores/campaigns'
 
 const route = useRoute()
 const router = useRouter()
