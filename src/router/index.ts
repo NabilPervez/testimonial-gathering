@@ -70,6 +70,11 @@ const router = createRouter({
                     path: 'new',
                     name: 'new-campaign',
                     component: () => import('../pages/campaign/new.vue')
+                },
+                {
+                    path: ':slug/:id',
+                    name: 'campaign-testimonial-detail',
+                    component: () => import('../pages/campaign/[slug]/[id].vue')
                 }
             ]
         },
@@ -81,17 +86,6 @@ const router = createRouter({
                     path: '',
                     name: 'displayboard',
                     component: () => import('../pages/displayboard.vue')
-                }
-            ]
-        },
-        {
-            path: '/testimonial/:id',
-            component: DashboardLayout,
-            children: [
-                {
-                    path: '',
-                    name: 'testimonial-details',
-                    component: () => import('../pages/testimonial/[id].vue')
                 }
             ]
         }

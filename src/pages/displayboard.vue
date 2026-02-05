@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTestimonialStore } from '../stores/testimonials'
+import AnimatedTestimonials from '../components/AnimatedTestimonials.vue'
 import { onMounted, computed } from 'vue'
 
 const store = useTestimonialStore()
@@ -9,6 +10,15 @@ onMounted(() => {
 })
 
 const testimonials = computed(() => store.approvedTestimonials)
+
+const formattedTestimonials = computed(() => {
+    return store.approvedTestimonials.map(t => ({
+        quote: t.content,
+        name: t.name,
+        designation: t.title,
+        image: t.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=000`
+    }))
+})
 </script>
 
 <template>
@@ -36,57 +46,9 @@ const testimonials = computed(() => store.approvedTestimonials)
 </div>
 </header>
 <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 flex flex-col gap-12 md:gap-20">
-<!-- Hero Section: Featured Testimonial (Static for MVP or First Item) -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[500px]">
-<!-- Left: Image Stack -->
-<div class="relative w-full flex justify-center lg:justify-end pr-0 lg:pr-10 group perspective-1000">
-<div class="relative w-full max-w-[400px] aspect-[4/5] md:aspect-square">
-<!-- Back Card (Decorative) -->
-<div class="absolute inset-0 bg-slate-200 dark:bg-gray-800 rounded-[2rem] transform rotate-6 scale-90 translate-x-4 opacity-40 transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:translate-x-6 z-0" data-alt="Abstract stacked card background pattern"></div>
-<!-- Middle Card (Decorative) -->
-<div class="absolute inset-0 bg-slate-300 dark:bg-gray-700 rounded-[2rem] transform -rotate-3 scale-95 translate-x-2 opacity-60 transition-transform duration-500 ease-out group-hover:-rotate-6 group-hover:-translate-x-2 z-10" data-alt="Abstract stacked card background pattern layer 2"></div>
-<!-- Front Card (Main Image) -->
-<div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl z-20 transform transition-transform duration-500 hover:scale-[1.02]">
-<div class="w-full h-full bg-cover bg-center" data-alt="Featured Testimonial Image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4oewxfyT3T42LkzyTulH5V_8_tUmGDL7cEfaRzypy7gdP7GwVQaibHiTRTCH0yTVtmMvhvqR-hapeV7sBRYx2Uszy2-j1LjIVxiaytg3lYozgXqT9dAjKfgiHkur3fB_ejIQvMsblWjSrtEM8jCkqvrDx2V4ZPApgRMcQ7FpqlKYTYMW9vzzZeslq1TU0i19Oc23iHrMLzblxVR_Kg7h-jIUIKLFHGIeyLnw-lfPURtiswbqQsU07tbg0ro3DbRVa0TWXMeRCZc');">
-<!-- Overlay gradient for text readability if needed inside card -->
-<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Right: Content -->
-<div class="flex flex-col justify-center gap-8 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
-<!-- Rating -->
-<div class="flex gap-1 justify-center lg:justify-start">
-<span class="material-symbols-outlined text-yellow-400 text-2xl fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-400 text-2xl fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-400 text-2xl fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-400 text-2xl fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-400 text-2xl fill-current">star</span>
-</div>
-<!-- Quote -->
-<div class="relative">
-<span class="absolute -top-6 -left-8 text-6xl text-slate-200 dark:text-gray-800 font-serif opacity-50 hidden lg:block">“</span>
-<h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
-                        This tool completely changed how we gather feedback. The automation saved us hours every week.
-                    </h1>
-</div>
-<!-- Author & Navigation -->
-<div class="flex flex-col gap-6">
-<div>
-<h3 class="text-xl font-bold text-slate-900 dark:text-white">Sarah Jenkins</h3>
-<p class="text-slate-500 dark:text-slate-400 font-medium mt-1">VP of Marketing at TechFlow</p>
-</div>
-<div class="flex items-center justify-center lg:justify-start gap-4 mt-2">
-<button aria-label="Previous testimonial" class="flex items-center justify-center w-12 h-12 rounded-full border border-slate-200 dark:border-gray-700 hover:bg-slate-100 dark:hover:bg-gray-800 text-slate-900 dark:text-white transition-all duration-200 group">
-<span class="material-symbols-outlined group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
-</button>
-<button aria-label="Next testimonial" class="flex items-center justify-center w-12 h-12 rounded-full bg-primary hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-all duration-200 group">
-<span class="material-symbols-outlined group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
+<!-- Hero Section: Dynamic Carousel -->
+<section class="min-h-[500px] flex items-center justify-center">
+    <AnimatedTestimonials :data="formattedTestimonials" :autoplay="true" />
 </section>
 <!-- Stats Section -->
 <section class="w-full bg-white dark:bg-card-dark rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100 dark:border-white/5">

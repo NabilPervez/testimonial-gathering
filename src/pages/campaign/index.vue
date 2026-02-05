@@ -79,7 +79,11 @@ const getRecentTestimonials = (slug: string) => {
                             </div>
                             <div class="flex flex-col overflow-hidden">
                                 <span class="text-sm font-bold text-slate-900 dark:text-white truncate group-hover/item:text-primary transition-colors">{{ t.name }}</span>
-                                <span class="text-xs text-slate-500 truncate">{{ t.title }}</span>
+                                <div class="flex items-center gap-1 text-xs text-slate-500 truncate">
+                                    <span>{{ t.title }}</span>
+                                    <span class="text-slate-300 dark:text-slate-600">•</span>
+                                    <span>{{ t.date }}</span>
+                                </div>
                             </div>
                             <Icon icon="material-symbols:chevron-right" class="ml-auto text-slate-400 opacity-0 group-hover/item:opacity-100 transition-opacity" />
                          </RouterLink>

@@ -22,7 +22,7 @@ const router = useRouter()
         </h1>
 
         <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-            The easiest way to gather video and text testimonials from your customers. Embed a beautiful Wall of Love in minutes.
+            The easiest way to gather video and text testimonials from your customers. Embed a beautiful Customer Feedback wall in minutes.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">

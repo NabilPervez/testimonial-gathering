@@ -15,17 +15,17 @@
               <Icon icon="material-symbols:dashboard-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
               <span class="text-sm font-medium">Dashboard</span>
             </RouterLink>
-            <RouterLink to="/campaign" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary/10 dark:bg-[#283039] text-primary dark:text-white transition-colors">
-              <Icon icon="material-symbols:campaign" class="size-6 icon-filled" />
+            <RouterLink to="/campaign" active-class="bg-primary/10 text-primary dark:bg-[#283039] dark:text-white" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+              <Icon icon="material-symbols:campaign" class="size-6 icon-filled group-[.router-link-active]:text-primary dark:group-[.router-link-active]:text-white" />
               <span class="text-sm font-medium">Campaigns</span>
             </RouterLink>
-            <RouterLink to="/dashboard/embed" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
+            <RouterLink to="/dashboard/embed" active-class="bg-primary/10 text-primary dark:bg-[#283039] dark:text-white" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+              <Icon icon="material-symbols:code" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors group-[.router-link-active]:text-primary dark:group-[.router-link-active]:text-white" />
               <span class="text-sm font-medium">Embeds</span>
             </RouterLink>
-            <RouterLink to="/displayboard" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
-              <Icon icon="material-symbols:preview" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
-              <span class="text-sm font-medium">Display Board</span>
+            <RouterLink to="/displayboard" active-class="bg-primary/10 text-primary dark:bg-[#283039] dark:text-white" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
+              <Icon icon="material-symbols:preview" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors group-[.router-link-active]:text-primary dark:group-[.router-link-active]:text-white" />
+              <span class="text-sm font-medium">Customer Feedback</span>
             </RouterLink>
             <RouterLink to="/dashboard/analytics" class="flex items-center gap-3 px-4 py-3 rounded-full text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#1c2127] transition-colors group">
               <Icon icon="material-symbols:analytics-outline" class="size-6 text-slate-400 group-hover:text-primary dark:group-hover:text-white transition-colors" />
