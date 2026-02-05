@@ -21,7 +21,7 @@ const testimonials = computed(() => store.approvedTestimonials)
 <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
 <span class="material-symbols-outlined text-[20px]">favorite</span>
 </div>
-<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Wall of Love</h2>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Customer Feedback</h2>
 </div>
 <div class="flex items-center gap-4">
 <button class="hidden sm:flex items-center justify-center px-5 h-9 rounded-full bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold shadow-lg shadow-primary/20">

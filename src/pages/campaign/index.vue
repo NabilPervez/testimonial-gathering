@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import { useCampaignStore } from '../../stores/campaigns'
+import { useTestimonialStore } from '../../stores/testimonials'
 import { onMounted, computed } from 'vue'
 
-const store = useCampaignStore()
+const campaignStore = useCampaignStore()
+const testimonialStore = useTestimonialStore()
 
 // Fetch data on mount
-onMounted(() => {
-    store.fetchCampaigns()
+onMounted(async () => {
+    campaignStore.fetchCampaigns()
+    await testimonialStore.fetchTestimonials()
 })
 
-const campaigns = computed(() => store.items)
+const campaigns = computed(() => campaignStore.items)
+
+const getRecentTestimonials = (slug: string) => {
+    return testimonialStore.items
+        .filter(t => t.campaignSlug === slug)
+        .slice(0, 3) // Get top 3
+}
 </script>
 
 <template>
@@ -30,7 +39,7 @@ const campaigns = computed(() => store.items)
     <div class="flex-1 overflow-y-auto px-8 pb-12">
       <div v-if="campaigns.length > 0" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <!-- Campaign Card -->
-        <div v-for="campaign in campaigns" :key="campaign.id" class="bg-white dark:bg-[#1c242c] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] hover:border-primary/50 transition-all group cursor-pointer relative">
+        <div v-for="campaign in campaigns" :key="campaign.id" class="bg-white dark:bg-[#1c242c] rounded-2xl p-6 border border-slate-200 dark:border-[#283039] hover:border-primary/50 transition-all group relative flex flex-col h-full">
             <div class="flex items-start justify-between mb-4">
                 <div class="p-3 rounded-xl bg-primary/10 text-primary">
                     <Icon icon="material-symbols:campaign" class="size-6" />
@@ -39,18 +48,44 @@ const campaigns = computed(() => store.items)
                     {{ campaign.status }}
                 </span>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{{ campaign.name }}</h3>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors cursor-pointer">{{ campaign.name }}</h3>
             <p class="text-sm text-slate-500 dark:text-[#9dabb9] font-mono mb-6">/c/{{ campaign.slug }}</p>
             
-            <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-[#283039]">
-                <div class="flex flex-col">
-                    <span class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase">Responses</span>
-                    <span class="text-lg font-bold text-slate-900 dark:text-white">{{ campaign.responses }}</span>
-                </div>
-                <div class="flex flex-col items-end">
-                    <span class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase">Last Activity</span>
-                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ campaign.lastActive }}</span>
-                </div>
+            <div class="mt-auto pt-4 border-t border-slate-100 dark:border-[#283039]">
+                <!-- Stats Row -->
+                 <div class="flex items-center justify-between mb-4">
+                    <div class="flex flex-col">
+                        <span class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase">Responses</span>
+                        <span class="text-lg font-bold text-slate-900 dark:text-white">{{ campaign.responses }}</span>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase">Last Active</span>
+                        <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ campaign.lastActive }}</span>
+                    </div>
+                 </div>
+
+                 <!-- Recent Activity: Drilldown -->
+                 <div class="flex flex-col gap-2">
+                    <span class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase">Recent Activity</span>
+                    <div class="flex flex-col gap-2">
+                         <RouterLink 
+                            v-for="t in getRecentTestimonials(campaign.slug)" 
+                            :key="t.id"
+                            :to="`/campaign/${campaign.slug}/${t.id}`"
+                            class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#283039] transition-colors group/item"
+                         >
+                            <div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300">
+                                {{ t.name.charAt(0) }}
+                            </div>
+                            <div class="flex flex-col overflow-hidden">
+                                <span class="text-sm font-bold text-slate-900 dark:text-white truncate group-hover/item:text-primary transition-colors">{{ t.name }}</span>
+                                <span class="text-xs text-slate-500 truncate">{{ t.title }}</span>
+                            </div>
+                            <Icon icon="material-symbols:chevron-right" class="ml-auto text-slate-400 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                         </RouterLink>
+                         <div v-if="getRecentTestimonials(campaign.slug).length === 0" class="text-sm text-slate-400 italic py-2">No recent activity</div>
+                    </div>
+                 </div>
             </div>
         </div>
       </div>
