@@ -2,15 +2,35 @@
 import { useTestimonialStore } from '../stores/testimonials'
 import AnimatedTestimonials from '../components/AnimatedTestimonials.vue'
 import { onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const store = useTestimonialStore()
+const route = useRoute()
+
+// Check for slug in route params
+const campaignSlug = computed(() => route.params.slug as string | undefined)
 
 onMounted(() => {
-    store.fetchTestimonials()
+    // If slug exists, we ideally fetch specific, but fetchTestimonials loads all currently.
+    // fetchByCampaign is available if needed, but for now we filter client side from the main list or fetch all.
+    // If we want to be efficient we should call fetchByCampaign if slug is present.
+    if (campaignSlug.value) {
+        store.fetchByCampaign(campaignSlug.value)
+    } else {
+        store.fetchTestimonials()
+    }
+})
+
+const displayTestimonials = computed(() => {
+    let items = store.approvedTestimonials
+    if (campaignSlug.value) {
+        items = items.filter(t => t.campaignSlug === campaignSlug.value)
+    }
+    return items
 })
 
 const formattedTestimonials = computed(() => {
-    return store.approvedTestimonials
+    return displayTestimonials.value
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 5) // Top 5 highest rated
         .map(t => ({
@@ -24,32 +44,9 @@ const formattedTestimonials = computed(() => {
 
 <template>
   <div class="bg-slate-50 dark:bg-[#0d1117] min-h-screen font-display">
-      <!-- Navbar (Simplified) -->
-      <header class="w-full bg-white/80 dark:bg-[#161b22]/80 backdrop-blur-md border-b border-slate-200 dark:border-[#30363d] sticky top-0 z-50">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-               <div class="flex items-center gap-2">
-                   <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">T</div>
-                   <span class="font-bold text-slate-900 dark:text-white">Testimonial.io</span>
-               </div>
-               <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-                   <a href="#" class="hover:text-primary transition-colors">Features</a>
-                   <a href="#" class="hover:text-primary transition-colors">Pricing</a>
-                   <a href="#" class="hover:text-primary transition-colors">Examples</a>
-               </nav>
-               <button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
-                   Get Started
-               </button>
-          </div>
-      </header>
-
       <main>
           <!-- Hero / Carousel Section -->
-          <section class="py-20 px-4">
-              <div class="max-w-4xl mx-auto text-center mb-16">
-                  <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4">Loved by design teams worldwide</h1>
-                  <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">See what our customers have to say about the product.</p>
-              </div>
-              
+          <section class="py-10 px-4">
               <div class="flex justify-center">
                   <AnimatedTestimonials :data="formattedTestimonials" :autoplay="true" />
               </div>
@@ -62,7 +59,7 @@ const formattedTestimonials = computed(() => {
                   
                   <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                       <!-- Promo Card -->
-                      <div v-for="t in store.approvedTestimonials" :key="t.id" class="break-inside-avoid bg-slate-50 dark:bg-[#0d1117] rounded-3xl p-6 border border-slate-200 dark:border-[#30363d] hover:border-primary/50 transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+                      <div v-for="t in displayTestimonials" :key="t.id" class="break-inside-avoid bg-slate-50 dark:bg-[#0d1117] rounded-3xl p-6 border border-slate-200 dark:border-[#30363d] hover:border-primary/50 transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
                           <!-- Header -->
                           <div class="flex items-center gap-4 mb-4">
                               <div class="size-12 rounded-full overflow-hidden bg-slate-200">

@@ -21,11 +21,7 @@ const router = createRouter({
             name: 'customer-feedback',
             component: () => import('../pages/customerfeedback.vue')
         },
-        {
-            path: '/displayboard',
-            name: 'display-board',
-            component: () => import('../pages/displayboard.vue')
-        },
+
         {
             path: '/login',
             name: 'login',
@@ -126,6 +122,11 @@ const router = createRouter({
                 {
                     path: '',
                     name: 'displayboard',
+                    component: () => import('../pages/displayboard.vue')
+                },
+                {
+                    path: ':slug',
+                    name: 'campaign-displayboard',
                     component: () => import('../pages/displayboard.vue')
                 }
             ]

@@ -38,6 +38,10 @@ const pendingCount = computed(() => testimonials.value.filter(t => t.status === 
                </span>
                
                <div class="ml-auto flex gap-2">
+                   <RouterLink :to="`/displayboard/${campaignSlug}`" class="px-4 py-2 border border-slate-200 dark:border-[#283039] rounded-lg text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-[#1c2127] transition-colors flex items-center gap-2">
+                       <Icon icon="material-symbols:preview" class="size-4" />
+                       Display Board
+                   </RouterLink>
                    <RouterLink :to="`/campaign/${campaignSlug}/embed`" class="px-4 py-2 border border-slate-200 dark:border-[#283039] rounded-lg text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-[#1c2127] transition-colors flex items-center gap-2">
                        <Icon icon="material-symbols:code" class="size-4" />
                        Embed
